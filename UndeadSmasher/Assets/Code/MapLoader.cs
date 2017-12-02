@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Code
 {
-    class MapLoader : MonoBehaviour
+    public class MapLoader : MonoBehaviour
     {
         public UndeadSmasherObjectFactory objectFactory;
 
@@ -25,11 +25,12 @@ namespace Assets.Code
             signToNameBlock.Add("s", "StoneBrickBlock");
         }
 
-        public void LoadMap(String mapPath)
+        public void LoadMap(string mapPath)
         {
-            XmlDocument xmlDoc = new XmlDocument();
+            TextAsset textAsset = Resources.Load(mapPath) as TextAsset;
 
-            xmlDoc.Load(mapPath);
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(textAsset.text);
 
             LoadBlockMap(xmlDoc);
             LoadObjectMap(xmlDoc);  
@@ -108,8 +109,7 @@ namespace Assets.Code
 
             objectFactory.CreateObject(position, name);
 
-            Debug.Log("GameObject Name = " + name + " position={" + position.x + ", " + position.y + ", " + position.z + "}\n");
-
+           
         }
         #endregion
 

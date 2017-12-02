@@ -54,6 +54,10 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
 
         newObject.transform.parent = spawnLocations.transform;
         newObject.transform.position = position;
+
+
+        Debug.Log("GameObject Name = " + name + " position={" + newObject.transform.position.x + ", " + newObject.transform.position.y + ", " + newObject.transform.position.z + "}\n");
+
     }
 
     public void CreateBlock(Vector3 position, String nameBlock)
@@ -73,9 +77,9 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
         newBlock.transform.parent = spawnLocations.transform;
 
         Vector3 absolutePosition = new Vector3(
-            position.x * scaleFactorForBlocks.x,
-            position.y * scaleFactorForBlocks.y,
-            position.z * scaleFactorForBlocks.z
+            spawnLocations.transform.position.x + (position.x * scaleFactorForBlocks.x),
+            spawnLocations.transform.position.y + (position.y * scaleFactorForBlocks.y),
+            spawnLocations.transform.position.z + (position.z * scaleFactorForBlocks.z)
         );
         newBlock.transform.position = absolutePosition;
     }
