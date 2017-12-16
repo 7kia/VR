@@ -25,11 +25,12 @@ namespace Assets.Code
             signToNameBlock.Add("s", "StoneBrickBlock");
         }
 
-        public void LoadMap(String mapPath)
+        public void LoadMap(string mapPath)
         {
-            XmlDocument xmlDoc = new XmlDocument();
+            TextAsset textAsset = Resources.Load(mapPath) as TextAsset;
 
-            xmlDoc.Load(mapPath);
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(textAsset.text);
 
             LoadBlockMap(xmlDoc);
             LoadObjectMap(xmlDoc);  

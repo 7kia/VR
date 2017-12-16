@@ -12,7 +12,7 @@ namespace Assets.Code
         // Use this for initialization
         void Start()
         {
-            m_mapLoader.LoadMap("Maps\\Levels.xml");
+            m_mapLoader.LoadMap("Level");
         }
 
         // Update is called once per frame
