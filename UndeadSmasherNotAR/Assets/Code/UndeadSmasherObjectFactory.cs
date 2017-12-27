@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Assets.Code.Behavior;
+using Assets.Code.Fractions;
+using Assets.Code.GameObjectFactory;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +12,7 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
     public GameObject spawnLocations;
     public Vector3 scaleFactorForBlocks;
 
-
+    public EffectManager effectManager;
     [SerializeField]
     public GameObject[] objectList;
     [SerializeField]
@@ -18,11 +21,17 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
     private Dictionary<string, GameObject> objectMap = new Dictionary<string, GameObject>();
     private Dictionary<string, GameObject> blockMap = new Dictionary<string, GameObject>();
 
-
+    // Ключ - название категории("Снаряд", например), Значение - виды("Стрела", "Бомба" и.т.д)
     public Dictionary<string, ActorNameAndParameters> actorParameters = new Dictionary<string, ActorNameAndParameters>();
     public Dictionary<string, string> typeToCategory = new Dictionary<string, string>();
 
-    private bool m_createNameMap = false;
+
+    private bool m_createNameMap = false;// TODO : надо ли?
+    private BulletFactory bulletFactory = new BulletFactory();
+    private WeaponFactory weaponFactory = new WeaponFactory();
+
+    private InanimateActorFactory inanimateActorFactory = new InanimateActorFactory();
+    private LiveActorFactory liveActorFactory = new LiveActorFactory();
 
     public void CreateNameMap()
     {
@@ -34,7 +43,28 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
             }
         }
 
-        
+        SetFactoryOptions();
+    }
+
+    private void SetFactoryOptions()
+    {
+       
+
+        weaponFactory.prefub = objectMap["Weapon"];
+        weaponFactory.objectFactory = this;
+        weaponFactory.effectManager = effectManager;
+
+        bulletFactory.prefub = objectMap["Bullet"];
+        bulletFactory.effectManager = effectManager;
+
+        inanimateActorFactory.prefub = objectMap["InanimateActor"];
+        inanimateActorFactory.effectManager = effectManager;
+
+        liveActorFactory.prefub = objectMap["LiveActor"];
+        liveActorFactory.objectFactory = this;
+        liveActorFactory.effectManager = effectManager;
+        //liveActorFactory.behaviorFactory = behaviorFactory;
+        liveActorFactory.weaponFactory = weaponFactory;
     }
 
     public void CreateObject(Vector3 position, String nameObject)
@@ -46,32 +76,46 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
             CreateNameMap();
         }
 
-        switch(nameObject)
-        {
-            case "Bullet":
-                throw new NotImplementedException();
-                break;
-            case "InanimateActor":
-                throw new NotImplementedException();
-                break;
-            case "LiveActor":
-                throw new NotImplementedException();
-                break;
-        }
-
-        GameObject newObject = Instantiate(
-            objectMap[nameObject],
-            spawnLocations.transform.position,
-            Quaternion.Euler(0, 0, 0)
-        ) as GameObject;
+        GameObject newObject = CreateUnallocatedObject(nameObject);
 
         newObject.transform.parent = spawnLocations.transform;
         newObject.transform.position = position;
 
-
         Debug.Log("GameObject Name = " + name + " position={" + newObject.transform.position.x + ", " + newObject.transform.position.y + ", " + newObject.transform.position.z + "}\n");
 
     }
+
+    private GameObject CreateUnallocatedObject(string nameObject)
+    {
+        GameObject newObject = null;
+        string newObjectCategory = typeToCategory[nameObject];
+        Dictionary<string, string> parametres = actorParameters[newObjectCategory][nameObject];
+
+        switch (newObjectCategory)
+        {
+            case "bullet":
+                newObject = bulletFactory.Create(
+                    spawnLocations.transform.position,
+                    new FractionValue(),// TODO : передай фракцию от владельца оружия
+                    parametres
+                );
+                break;
+            case "inanimateActor":
+                newObject = inanimateActorFactory.Create(
+                    spawnLocations.transform.position,
+                    parametres
+                );
+                break;
+            case "liveActor":
+                newObject = liveActorFactory.Create(
+                    spawnLocations.transform.position,
+                    parametres
+                );
+                break;
+        }
+        return newObject;
+    }
+
 
     public void CreateBlock(Vector3 position, String nameBlock)
     {
@@ -81,11 +125,8 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
             CreateNameMap();
         }
 
-        GameObject newBlock = Instantiate(
-            blockMap[nameBlock],
-            spawnLocations.transform.position,
-            Quaternion.Euler(0, 0, 0)
-        ) as GameObject;
+        GameObject newBlock = CreateUnallocatedObject(nameBlock);
+
 
         newBlock.transform.parent = spawnLocations.transform;
 

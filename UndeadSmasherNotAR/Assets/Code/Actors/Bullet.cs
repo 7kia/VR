@@ -1,11 +1,12 @@
 ﻿using Assets.Code.Component;
+using Assets.Code.Fractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace Assets.Code
+namespace Assets.Code.Actors
 {
     public struct BulletOptions
     {
@@ -17,12 +18,12 @@ namespace Assets.Code
         public string bulletName;
     }
 
-    class Bullet : Actor
+    public class Bullet : Actor
     {
-        private float velocity;
-        private float lifeTime;
-        private IBehavior behavior;
-        private PortionDamage portionDamage;
+        public float velocity;
+        public float lifeTime;
+        public IBehavior behavior;
+        public PortionDamage portionDamage;
 
         public Bullet()
         {
@@ -31,7 +32,11 @@ namespace Assets.Code
 
         void Update()// TODO : может несработать посмотри в код старой игры
         {
-            behavior.Execute(Time.deltaTime);
+            if (behavior)
+            {
+                behavior.Execute(Time.deltaTime);
+            }
+            
         }
     }
 }

@@ -36,6 +36,7 @@ namespace Assets.Code
         public void ResetTimer()
         {
             time = maxTime;
+            m_endTime = false;
         }
 
         public void StopTimer()

@@ -16,14 +16,12 @@ namespace Assets.Code
         {
             TextAsset textAsset = Resources.Load(mapPath) as TextAsset;
 
-            Debug.Log(mapPath);
-            Debug.Log(textAsset.text);
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(textAsset.text);
 
             XmlNode xmlNode = xmlDoc.SelectSingleNode("configData");
-            LoadWeapon(xmlNode);// TODO : возможно некорректное считывание float чисел
             LoadBullet(xmlNode);
+            LoadWeapon(xmlNode);// TODO : возможно некорректное считывание float чисел
             LoadLiveActor(xmlNode);
             LoadInanimateActor(xmlNode);
 
@@ -77,8 +75,6 @@ namespace Assets.Code
                 var subNode = xmlNode.SelectSingleNode(node.Key);
                 foreach (var parametr in node.Value)
                 {
-                    Debug.Log((xmlNode != null));
-                    Debug.Log((parametr != null));
                     parameters.Add(parametr, GetAtribute(ref subNode, parametr));
                 }
             }
@@ -121,8 +117,10 @@ namespace Assets.Code
         {
             foreach(var pair in objectFactory.actorParameters[elementName])
             {
-                objectFactory.typeToCategory.Add(elementName, pair.Key);
-                Debug.Log(elementName + " => " + pair.Key);
+                if (!objectFactory.typeToCategory.ContainsKey(elementName))
+                {
+                    objectFactory.typeToCategory.Add(pair.Key, elementName);
+                }
             }
         }
         #endregion

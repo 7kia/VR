@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Assets.Code.Actors;
+using Assets.Code.Fractions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,7 +56,7 @@ public class EffectManager : MonoBehaviour {
         FractionValue firstFraction = firstActor.fraction;
         FractionValue secondFraction = secondActor.fraction;
 
-        Debug.Log("handleBulletAndInanimate");
+       // Debug.Log("handleBulletAndInanimate");
         //throw new NotImplementedException();
     }
 
@@ -66,7 +68,7 @@ public class EffectManager : MonoBehaviour {
         FractionValue firstFraction = firstActor.fraction;
         FractionValue secondFraction = secondActor.fraction;
 
-        Debug.Log("handleBulletAndLive");
-        throw new NotImplementedException();
+        //Debug.Log("handleBulletAndLive");
+        //throw new NotImplementedException();
     }
 }

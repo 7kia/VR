@@ -13,9 +13,9 @@ namespace Assets.Code
         // Use this for initialization
         void Start()
         {
-
-            mapLoader.LoadMap("Level");
             gameObjectConfigManager.LoadConfig("GameObjects");
+            mapLoader.LoadMap("Level");
+            
         }
 
         // Update is called once per frame

@@ -13,7 +13,7 @@
 	</bullets>
 	
 	<liveActors>
-		<liveActor name="Magic_eye" health="10" fraction="Player" weapon="Arrow" behavior="ControlledBehavior">
+		<liveActor name="Magic_eye" health="10" fraction="Player" weapon="PlayerWeapon" behavior="ControlledBehavior">
 		</liveActor>
 	</liveActors>
 	
