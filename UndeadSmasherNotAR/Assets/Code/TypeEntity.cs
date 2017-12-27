@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TypeEntity : MonoBehaviour {
+public class TypeEntity {
 
     public enum Type
     {
@@ -12,14 +12,4 @@ public class TypeEntity : MonoBehaviour {
     }
 
     public Type value = Type.Inanimate;
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

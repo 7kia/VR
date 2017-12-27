@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<levelData id="0">
+	<blockMap length="10" height="5" width="10">
+		<level> 
+			<row value="ssssssssss"/>
+			<row value="ssssssssss"/>
+			<row value="ssssssssss"/>
+			<row value="ssssssssss"/>
+			<row value="ssssssssss"/>
+			<row value="ssssssssss"/>
+			<row value="ssssssssss"/>
+			<row value="ssssssssss"/>
+			<row value="ssssssssss"/>
+			<row value="ssssssssss"/>
+		</level>
+		<level> 
+			<row value="ssssssssss"/>
+			<row value="s##s##s##s"/>
+			<row value="s##s##s##s"/>
+			<row value="ssss##ssss"/>
+			<row value="s########s"/>
+			<row value="s########s"/>
+			<row value="ssss##ssss"/>
+			<row value="s##s##s##s"/>
+			<row value="s##s##s##s"/>
+			<row value="ssssssssss"/>
+		</level>
+		<level> 
+			<row value="ssssssssss"/>
+			<row value="s##s##s##s"/>
+			<row value="s##s##s##s"/>
+			<row value="ssss##ssss"/>
+			<row value="s########s"/>
+			<row value="s########s"/>
+			<row value="ssss##ssss"/>
+			<row value="s##s##s##s"/>
+			<row value="s##s##s##s"/>
+			<row value="ssssssssss"/>
+		</level>
+		<level> 
+			<row value="ssssssssss"/>
+			<row value="spps##spps"/>
+			<row value="spps##spps"/>
+			<row value="ssss##ssss"/>
+			<row value="s########s"/>
+			<row value="s########s"/>
+			<row value="ssss##ssss"/>
+			<row value="spps##spps"/>
+			<row value="spps##spps"/>
+			<row value="ssssssssss"/>
+		</level>
+		<level> 
+			<row value="ssss##ssss"/>
+			<row value="s##s##s##s"/>
+			<row value="s##s##s##s"/>
+			<row value="ssss##ssss"/>
+			<row value="##########"/>
+			<row value="##########"/>
+			<row value="ssss##ssss"/>
+			<row value="s##s##s##s"/>
+			<row value="s##s##s##s"/>
+			<row value="ssss##ssss"/>
+		</level>
+	</blockMap>
+	<objects>
+	  <object name="Magic_eye" x="2" y="2" z="3" />
+	</objects>
+</levelData>

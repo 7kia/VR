@@ -36,8 +36,6 @@ public class EffectManager : MonoBehaviour {
         InteractionTypePair typePair = new InteractionTypePair(firstType.value, secondType.value);
         InteractionTypePair reverseTypePair = new InteractionTypePair(secondType.value, firstType.value);
 
-        Debug.Log(handlers.ContainsKey(typePair));
-        Debug.Log(handlers.ContainsKey(reverseTypePair));
         if (handlers.ContainsKey(typePair))
         {
             handlers[typePair](first, second);

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ActorNameAndParameters = System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>;
 public class UndeadSmasherObjectFactory : MonoBehaviour {
 
     public GameObject spawnLocations;
@@ -12,10 +13,15 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
     [SerializeField]
     public GameObject[] objectList;
     [SerializeField]
-    public GameObject[] blockList;
+    public string[] blockList;
 
     private Dictionary<string, GameObject> objectMap = new Dictionary<string, GameObject>();
     private Dictionary<string, GameObject> blockMap = new Dictionary<string, GameObject>();
+
+
+    public Dictionary<string, ActorNameAndParameters> actorParameters = new Dictionary<string, ActorNameAndParameters>();
+    public Dictionary<string, string> typeToCategory = new Dictionary<string, string>();
+
     private bool m_createNameMap = false;
 
     public void CreateNameMap()
@@ -28,13 +34,7 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
             }
         }
 
-        for (int i = 0; i < blockList.Length; i++)
-        {
-            if (!blockMap.ContainsKey(blockList[i].name))
-            {
-                blockMap.Add(blockList[i].name, blockList[i]);
-            }
-        }
+        
     }
 
     public void CreateObject(Vector3 position, String nameObject)
@@ -44,6 +44,19 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
         {
             m_createNameMap = false;
             CreateNameMap();
+        }
+
+        switch(nameObject)
+        {
+            case "Bullet":
+                throw new NotImplementedException();
+                break;
+            case "InanimateActor":
+                throw new NotImplementedException();
+                break;
+            case "LiveActor":
+                throw new NotImplementedException();
+                break;
         }
 
         GameObject newObject = Instantiate(
@@ -83,5 +96,7 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
         );
         newBlock.transform.position = absolutePosition;
     }
+
+     
 
 }

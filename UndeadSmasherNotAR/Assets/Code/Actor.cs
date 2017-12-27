@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Code;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,8 +8,10 @@ public class Actor : MonoBehaviour
 
     public EffectManager effectManager;
     public FractionValue fraction;
-    public TypeEntity type;
+    public TypeEntity type = new TypeEntity();
     public Rigidbody physicBody;
+
+    public DynamicСharacteristic<int> health;
 
     // Use this for initialization
     void Start()

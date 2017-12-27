@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<configData>
+	<weapons>
+		<weapon name="PlayerWeapon" cooldown="0.5" >
+			<bulletCounter bulletCounter__count="3" bulletCounter__isCountless="false" />
+		</weapon>
+	</weapons>
+	
+	<bullets>
+		<bullet name="Arrow" lifeTime="0.5" velocity="10.0" behavior="DirectFlyingBehavior">
+			<portionDamage portionDamage__damage="1"/>
+		</bullet>
+	</bullets>
+	
+	<liveActors>
+		<liveActor name="Magic_eye" health="10" fraction="Player" weapon="Arrow" behavior="ControlledBehavior">
+		</liveActor>
+	</liveActors>
+	
+	<inanimateActors>
+		<inanimateActor name="PlankBlock" health="1" fraction="Neutral">
+		</inanimateActor>
+		<inanimateActor name="StoneBrickBlock" health="20" fraction="Neutral">
+		</inanimateActor>
+	</inanimateActors>
+</configData>
+
