@@ -1,4 +1,5 @@
 ﻿using Assets.Code;
+using Assets.Code.Component;
 using Assets.Code.Fractions;
 using System.Collections;
 using System.Collections.Generic;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Code.Fractions
 {
-    public class FractionValue : MonoBehaviour
+    public class FractionValue
     {
 
         public enum Fraction
@@ -16,17 +16,6 @@ namespace Assets.Code.Fractions
 
         public Fraction value = Fraction.Neutral;
 
-        // Use this for initialization
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
 
 
     }

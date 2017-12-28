@@ -107,6 +107,7 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
                 );
                 break;
             case "liveActor":
+               
                 newObject = liveActorFactory.Create(
                     spawnLocations.transform.position,
                     parametres
