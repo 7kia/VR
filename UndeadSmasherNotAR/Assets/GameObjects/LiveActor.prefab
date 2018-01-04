@@ -84,7 +84,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1472300816298860}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!54 &54404962538788926
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -124,7 +124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectManager: {fileID: 0}
-  fraction: {fileID: 0}
   physicBody: {fileID: 54404962538788926}
   weapon: {fileID: 0}
   behavior: {fileID: 0}

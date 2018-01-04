@@ -11,6 +11,7 @@ namespace Assets.Code.GameObjectFactory
     public class InanimateActorFactory : MonoBehaviour
     {
         public GameObject prefub;
+        public ActorBodyManager actorBodyManager;
         public EffectManager effectManager;
 
         public GameObject Create(
@@ -31,7 +32,30 @@ namespace Assets.Code.GameObjectFactory
             inanimateActor.name = otherParameters["name"];
             inanimateActor.health.value = uint.Parse(otherParameters["health"]);
             inanimateActor.fraction = FractionFactory.Create(otherParameters["fraction"]);
-           
+
+            ///////////////
+            // For model
+            BoxCollider actorCollider = newObject.GetComponent<BoxCollider>();
+            actorCollider.size = new Vector3(
+                float.Parse(otherParameters["sizeX"]),
+                float.Parse(otherParameters["sizeY"]),
+                float.Parse(otherParameters["sizeZ"])
+            );
+            actorCollider.center = new Vector3(
+                float.Parse(otherParameters["centerX"]),
+                float.Parse(otherParameters["centerY"]),
+                float.Parse(otherParameters["centerZ"])
+            );
+
+
+            GameObject newModel = Instantiate(
+                actorBodyManager.modelDictionary[otherParameters["model"]],
+                position,
+                Quaternion.Euler(0, 0, 0)
+            ) as GameObject;
+            newModel.transform.parent = newObject.transform;
+            ///////////////
+
             return newObject;
         }
     }

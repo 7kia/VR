@@ -120,6 +120,7 @@ namespace Assets.Code
                 if (!objectFactory.typeToCategory.ContainsKey(elementName))
                 {
                     objectFactory.typeToCategory.Add(pair.Key, elementName);
+                    Debug.Log("typeToCategory = " + pair.Key + " => " + elementName);
                 }
             }
         }
@@ -166,9 +167,20 @@ namespace Assets.Code
             List<string> mainParameters = new List<string>();
             mainParameters.Add("name");
             mainParameters.Add("health");
+            mainParameters.Add("model");
+
             mainParameters.Add("fraction");
             mainParameters.Add("weapon");
             mainParameters.Add("behavior");
+
+            List<string> colliderFeatureParameters = new List<string>();
+            colliderFeatureParameters.Add("centerX");
+            colliderFeatureParameters.Add("centerY");
+            colliderFeatureParameters.Add("centerZ");
+            colliderFeatureParameters.Add("sizeX");
+            colliderFeatureParameters.Add("sizeY");
+            colliderFeatureParameters.Add("sizeZ");
+            subNodes.Add("colliderFeatures", colliderFeatureParameters);
 
             var actorNameAndParameters = ExtractParameters(
                 xmlDoc,
@@ -195,8 +207,18 @@ namespace Assets.Code
             Dictionary<string, List<string>> subNodes = new Dictionary<string, List<string>>();
             List<string> mainParameters = new List<string>();
             mainParameters.Add("name");
+            mainParameters.Add("model");
             mainParameters.Add("health");
             mainParameters.Add("fraction");
+
+            List<string> colliderFeatureParameters = new List<string>();
+            colliderFeatureParameters.Add("centerX");
+            colliderFeatureParameters.Add("centerY");
+            colliderFeatureParameters.Add("centerZ");
+            colliderFeatureParameters.Add("sizeX");
+            colliderFeatureParameters.Add("sizeY");
+            colliderFeatureParameters.Add("sizeZ");
+            subNodes.Add("colliderFeatures", colliderFeatureParameters);
 
             var actorNameAndParameters = ExtractParameters(
                 xmlDoc,

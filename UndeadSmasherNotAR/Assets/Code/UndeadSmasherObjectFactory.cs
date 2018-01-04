@@ -12,6 +12,7 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
     public GameObject spawnLocations;
     public Vector3 scaleFactorForBlocks;
 
+    public ActorBodyManager actorBodyManager;
     public EffectManager effectManager;
     [SerializeField]
     public GameObject[] objectList;
@@ -48,23 +49,40 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
 
     private void SetFactoryOptions()
     {
-       
+        SetWeaponFactory();
+        SetBulletFactory();
+        SetInanimateActorFactory();
+        SetLiveActorFactory();
+    }
 
+    private void SetBulletFactory()
+    {
+        bulletFactory.prefub = objectMap["Bullet"];
+        bulletFactory.effectManager = effectManager;
+    }
+
+    private void SetWeaponFactory()
+    {
         weaponFactory.prefub = objectMap["Weapon"];
         weaponFactory.objectFactory = this;
         weaponFactory.effectManager = effectManager;
+    }
 
-        bulletFactory.prefub = objectMap["Bullet"];
-        bulletFactory.effectManager = effectManager;
-
+    private void SetInanimateActorFactory()
+    {
         inanimateActorFactory.prefub = objectMap["InanimateActor"];
         inanimateActorFactory.effectManager = effectManager;
+        inanimateActorFactory.actorBodyManager = actorBodyManager;
+    }
 
+    private void SetLiveActorFactory()
+    {
         liveActorFactory.prefub = objectMap["LiveActor"];
         liveActorFactory.objectFactory = this;
         liveActorFactory.effectManager = effectManager;
         //liveActorFactory.behaviorFactory = behaviorFactory;
         liveActorFactory.weaponFactory = weaponFactory;
+        liveActorFactory.actorBodyManager = actorBodyManager;
     }
 
     public void CreateObject(Vector3 position, String nameObject)
@@ -88,6 +106,7 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
     private GameObject CreateUnallocatedObject(string nameObject)
     {
         GameObject newObject = null;
+        Debug.Log(nameObject);
         string newObjectCategory = typeToCategory[nameObject];
         Dictionary<string, string> parametres = actorParameters[newObjectCategory][nameObject];
 

@@ -4,6 +4,9 @@
 		<weapon name="PlayerWeapon" cooldown="0.5" >
 			<bulletCounter bulletCounter__count="3" bulletCounter__isCountless="false" />
 		</weapon>
+		<weapon name="SkeletonArcherWeapon" cooldown="1" >
+			<bulletCounter bulletCounter__count="1" bulletCounter__isCountless="true" />
+		</weapon>
 	</weapons>
 	
 	<bullets>
@@ -13,14 +16,30 @@
 	</bullets>
 	
 	<liveActors>
-		<liveActor name="Magic_eye" health="10" fraction="Player" weapon="PlayerWeapon" behavior="ControlledBehavior">
+		<liveActor name="MagicEye" health="10" model="MagicEye" 
+			fraction="Player" weapon="PlayerWeapon" behavior="ControlledBehavior">
+			<colliderFeatures centerX="0" centerY="1.264442" centerZ="0"
+				sizeX="1" sizeY="2.738399" sizeZ="1"
+			/>
+		</liveActor>
+		<liveActor name="SkeletonArcher" health="1" model="SkeletonArcher" 
+			fraction="Undead" weapon="SkeletonArcherWeapon" behavior="AggressiveBehavior">
+			<colliderFeatures centerX="0" centerY="1.264442" centerZ="0"
+				sizeX="1" sizeY="2.738399" sizeZ="1"
+			/>
 		</liveActor>
 	</liveActors>
 	
 	<inanimateActors>
-		<inanimateActor name="PlankBlock" health="1" fraction="Neutral">
+		<inanimateActor name="PlankBlock" model="PlankBlock" health="1" fraction="Neutral">
+			<colliderFeatures centerX="0" centerY="0" centerZ="0"
+					sizeX="1" sizeY="1" sizeZ="1"
+				/>
 		</inanimateActor>
-		<inanimateActor name="StoneBrickBlock" health="20" fraction="Neutral">
+		<inanimateActor name="StoneBrickBlock" model="StoneBrickBlock" health="20" fraction="Neutral">
+			<colliderFeatures centerX="0" centerY="0" centerZ="0"
+					sizeX="1" sizeY="1" sizeZ="1"
+				/>
 		</inanimateActor>
 	</inanimateActors>
 </configData>

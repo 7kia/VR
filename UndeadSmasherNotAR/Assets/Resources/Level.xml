@@ -63,6 +63,6 @@
 		</level>
 	</blockMap>
 	<objects>
-	  <object name="Magic_eye" x="2" y="2" z="3" />
+	  <object name="MagicEye" x="2" y="2" z="3" />
 	</objects>
 </levelData>
