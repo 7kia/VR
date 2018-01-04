@@ -31,6 +31,9 @@ namespace Assets.Code.Actors
 
             if (createdBullet)
             {
+                var shift = (target.transform.position - this.transform.position).normalized * 1.5f;
+                createdBullet.transform.position += shift;
+
                 Bullet bullet = createdBullet.GetComponent<Bullet>();
 
                 SetTargetForBullet(bullet, target);

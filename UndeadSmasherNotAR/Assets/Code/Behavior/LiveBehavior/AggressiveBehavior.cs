@@ -67,7 +67,7 @@ namespace Assets.Code.Behavior.BulletBehavior
             }
         }
 
-        private bool IsWarringFractions(FractionValue.Fraction first, FractionValue.Fraction second)
+        public static bool IsWarringFractions(FractionValue.Fraction first, FractionValue.Fraction second)
         {
             bool firstIsNeutral = (first == FractionValue.Fraction.Neutral);
             bool secondIsNeutral = (second == FractionValue.Fraction.Neutral);

@@ -33,19 +33,19 @@ namespace Assets.Code.Actors
                 //Debug.Log("Current time = " + cooldown.time);
                 //Debug.Log("Max time = " + cooldown.maxTime);
                 //cooldown.AddToTime(deltatime);
-                Debug.Log("cooldown.time = " + cooldown.time);
-                Debug.Log("cooldown.maxTime = " + cooldown.maxTime);
+                //Debug.Log("cooldown.time = " + cooldown.time);
+                //Debug.Log("cooldown.maxTime = " + cooldown.maxTime);
                 if (cooldown.NowTimeMoreMax())
                 {
 
                     cooldown.StopTimer();
                     cooldown.ResetTimer();
                     bulletCounter.value -= 1;
-                    Debug.Log("Shoot");
-                    Debug.Log("deltatime = " + deltatime);
-                    Debug.Log("cooldown.time = " + cooldown.time);
-                    Debug.Log("cooldown.maxTime = " + cooldown.maxTime);
-                    Debug.Log("bulletCounter.value = " + bulletCounter.value);
+                    //Debug.Log("Shoot");
+                    //Debug.Log("deltatime = " + deltatime);
+                    //Debug.Log("cooldown.time = " + cooldown.time);
+                    //Debug.Log("cooldown.maxTime = " + cooldown.maxTime);
+                    //Debug.Log("bulletCounter.value = " + bulletCounter.value);
                     //Debug.Log("owner =" + (owner != null));
                     //Debug.Log("bulletOptions =" + (bulletOptions != null));
                     return objectFactory.CreateObject(owner.transform.position, bulletOptions.bulletName);

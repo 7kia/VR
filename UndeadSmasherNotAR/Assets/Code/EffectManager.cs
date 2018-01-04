@@ -7,7 +7,7 @@ using UnityEngine;
 
 using InteractionTypePair = System.Collections.Generic.KeyValuePair<TypeEntity.Type, TypeEntity.Type>;
 using FractionPair = System.Collections.Generic.KeyValuePair<Assets.Code.Fractions.FractionValue, Assets.Code.Fractions.FractionValue>;
-
+using Assets.Code.Behavior.BulletBehavior;
 
 namespace Assets.Code
 {
@@ -73,14 +73,14 @@ namespace Assets.Code
             FractionValue firstFraction = firstActor.fraction;
             FractionValue secondFraction = secondActor.fraction;
 
-            LiveActor liveActor = first.GetComponent<LiveActor>();
-            Bullet bullet = second.GetComponent<Bullet>();
+            Bullet bullet = first.GetComponent<Bullet>();
+            LiveActor liveActor = second.GetComponent<LiveActor>();
 
-            Debug.Log("liveActor.health.value = " + liveActor.health.value);
-            Debug.Log("bullet.bulletOptions.portionDamage.damage = " + bullet.bulletOptions.portionDamage.damage);
-            liveActor.health.value -= bullet.bulletOptions.portionDamage.damage;
-            Debug.Log("Bullet destroy");
-            Destroy(second);
+            if (AggressiveBehavior.IsWarringFractions(bullet.fraction.value, liveActor.fraction.value))
+            {
+                liveActor.health.value -= bullet.bulletOptions.portionDamage.damage;
+            }
+            Destroy(first);
 
             //Debug.Log("handleBulletAndLive");
             //throw new NotImplementedException();
