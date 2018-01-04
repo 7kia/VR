@@ -8,14 +8,20 @@ using UnityEngine;
 
 namespace Assets.Code.Actors
 {
-    public struct BulletOptions
+    public class BulletOptions
     {
-        public FractionValue fraction;
+        public FractionValue fraction = new FractionValue();
         public float velocity;
         public float lifeTime;
         public IBehavior behavior;
-        public PortionDamage portionDamage;
+        public PortionDamage portionDamage = new PortionDamage();
         public string bulletName;
+
+        public BulletOptions()
+        {
+
+        }
+
     }
 
     public class Bullet : Actor
@@ -24,9 +30,14 @@ namespace Assets.Code.Actors
         public float lifeTime;
         public IBehavior behavior;
         public PortionDamage portionDamage;
+        public BulletOptions bulletOptions;
 
         public Bullet()
         {
+            bulletOptions = new BulletOptions();
+            bulletOptions.portionDamage = new PortionDamage();
+            bulletOptions.fraction = new FractionValue();
+
             type.value = TypeEntity.Type.Bullet;
         }
 

@@ -8,21 +8,21 @@ namespace Assets.Code.Behavior
 {
     public class BehaviorFactory
     {
-        public EffectManager effectManager;
+        public ActorManager actorManager;
 
         private DirectFlyingBehavior directFlyingBehavior = new DirectFlyingBehavior();
         private HomingBehavior homingBehavior = new HomingBehavior();
         private AggressiveBehavior aggressiveBehavior = new AggressiveBehavior();
         private ControlledBehavior controlledBehavior = new ControlledBehavior();
 
-        public BehaviorFactory(EffectManager manager)
+        public BehaviorFactory(ActorManager manager)
         {
-            effectManager = manager;
+            actorManager = manager;
 
-            directFlyingBehavior.effectManager = manager;
-            homingBehavior.effectManager = manager;
-            aggressiveBehavior.effectManager = manager;
-            controlledBehavior.effectManager = manager;
+            directFlyingBehavior.actorManager = manager;
+            homingBehavior.actorManager = manager;
+            aggressiveBehavior.actorManager = manager;
+            controlledBehavior.actorManager = manager;
         }
 
         // TODO : нужно передать объект для связи с внешним миром

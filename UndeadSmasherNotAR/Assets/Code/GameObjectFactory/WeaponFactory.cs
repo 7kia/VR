@@ -35,7 +35,13 @@ namespace Assets.Code.GameObjectFactory
             weapon.bulletCounter.value = uint.Parse(otherParameters["bulletCounter__count"]);
             weapon.bulletCounter.maxValue = uint.Parse(otherParameters["bulletCounter__count"]);
             weapon.bulletCounter.isCountless = bool.Parse(otherParameters["bulletCounter__isCountless"]);
-            
+
+            weapon.bulletOptions.bulletName = otherParameters["bulletFeatures__name"];
+            weapon.bulletOptions.portionDamage.damage = uint.Parse(otherParameters["bulletFeatures__damage"]);
+            weapon.bulletOptions.lifeTime = float.Parse(otherParameters["bulletFeatures__lifeTime"]);
+            weapon.bulletOptions.velocity = float.Parse(otherParameters["bulletFeatures__velocity"]);
+            weapon.bulletOptions.behavior = objectFactory.behaviorFactory.Create(otherParameters["bulletFeatures__behavior"]);
+
             return newObject;
         }
     }

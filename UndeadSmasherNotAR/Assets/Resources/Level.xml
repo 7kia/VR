@@ -64,5 +64,7 @@
 	</blockMap>
 	<objects>
 	  <object name="MagicEye" x="2" y="2" z="3" />
+	  <object name="SkeletonArcher" x="3.63" y="1.85" z="0.49" />
+	  
 	</objects>
 </levelData>

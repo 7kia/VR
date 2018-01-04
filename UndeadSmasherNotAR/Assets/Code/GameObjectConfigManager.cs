@@ -99,6 +99,14 @@ namespace Assets.Code
             bulletCounterParameters.Add("bulletCounter__isCountless");
             subNodes.Add("bulletCounter", bulletCounterParameters);
 
+            List<string> bulletFeaturesParameters = new List<string>();
+            bulletFeaturesParameters.Add("bulletFeatures__name");
+            bulletFeaturesParameters.Add("bulletFeatures__damage");
+            bulletFeaturesParameters.Add("bulletFeatures__lifeTime");
+            bulletFeaturesParameters.Add("bulletFeatures__velocity");
+            bulletFeaturesParameters.Add("bulletFeatures__behavior");
+            subNodes.Add("bulletFeatures", bulletFeaturesParameters);
+
             var actorNameAndParameters = ExtractParameters(
                 xmlDoc,
                 groupName,
@@ -135,13 +143,16 @@ namespace Assets.Code
             Dictionary<string, List<string>> subNodes = new Dictionary<string, List<string>>();
             List<string> mainParameters = new List<string>();
             mainParameters.Add("name");
-            mainParameters.Add("lifeTime");
-            mainParameters.Add("velocity");
-            mainParameters.Add("behavior");
+            mainParameters.Add("model");
 
-            List<string> portionDamageParameters = new List<string>();
-            portionDamageParameters.Add("portionDamage__damage");
-            subNodes.Add("portionDamage", portionDamageParameters);
+            List<string> colliderFeatureParameters = new List<string>();
+            colliderFeatureParameters.Add("centerX");
+            colliderFeatureParameters.Add("centerY");
+            colliderFeatureParameters.Add("centerZ");
+            colliderFeatureParameters.Add("sizeX");
+            colliderFeatureParameters.Add("sizeY");
+            colliderFeatureParameters.Add("sizeZ");
+            subNodes.Add("colliderFeatures", colliderFeatureParameters);
 
             var actorNameAndParameters = ExtractParameters(
                 xmlDoc,

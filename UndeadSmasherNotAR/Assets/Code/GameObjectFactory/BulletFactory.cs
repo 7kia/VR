@@ -9,7 +9,7 @@ using Assets.Code.Actors;
 
 namespace Assets.Code.GameObjectFactory
 {
-    public class BulletFactory : MonoBehaviour
+    public class BulletFactory : FactoryWithActorBody
     {
         public GameObject prefub;
         public EffectManager effectManager;
@@ -30,11 +30,14 @@ namespace Assets.Code.GameObjectFactory
             Bullet bullet = newObject.GetComponent<Bullet>();
             bullet.effectManager = effectManager;
 
-            bullet.fraction.value = fraction.value;
             bullet.name = otherParameters["name"];
+            bullet.fraction = fraction;
             bullet.lifeTime = float.Parse(otherParameters["lifeTime"]);
             bullet.velocity = float.Parse(otherParameters["velocity"]);
             bullet.behavior = behaviorFactory.Create(otherParameters["behavior"]);
+
+            SetCollider(otherParameters, newObject);
+            CreateModelForActor(newObject, position, otherParameters["model"]);
 
             return newObject;
         }

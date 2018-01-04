@@ -13,6 +13,7 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
     public GameObject spawnLocations;
     public Vector3 scaleFactorForBlocks;
 
+    public ActorManager actorManager;
     public ActorBodyManager actorBodyManager;
     public EffectManager effectManager;
     public BehaviorFactory behaviorFactory;
@@ -60,7 +61,7 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
 
     private void SetBehaviorFactory()
     {
-        behaviorFactory = new BehaviorFactory(effectManager);
+        behaviorFactory = new BehaviorFactory(actorManager);
     }
 
     private void SetBulletFactory()
@@ -68,6 +69,7 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
         bulletFactory.prefub = objectMap["Bullet"];
         bulletFactory.effectManager = effectManager;
         bulletFactory.behaviorFactory = behaviorFactory;
+        bulletFactory.actorBodyManager = actorBodyManager;
     }
 
     private void SetWeaponFactory()
@@ -94,7 +96,7 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
         liveActorFactory.actorBodyManager = actorBodyManager;
     }
 
-    public void CreateObject(Vector3 position, String nameObject)
+    public GameObject CreateObject(Vector3 position, String nameObject)
     {
 
         if(!m_createNameMap)
@@ -108,6 +110,7 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
         newObject.transform.parent = spawnLocations.transform;
         newObject.transform.position = position;
 
+        return newObject;
         //Debug.Log("GameObject Name = " + name + " position={" + newObject.transform.position.x + ", " + newObject.transform.position.y + ", " + newObject.transform.position.z + "}\n");
 
     }

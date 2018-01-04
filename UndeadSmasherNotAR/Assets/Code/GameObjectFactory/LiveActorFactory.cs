@@ -9,10 +9,10 @@ using UnityEngine;
 
 namespace Assets.Code.GameObjectFactory
 {
-    public class LiveActorFactory : MonoBehaviour
+    public class LiveActorFactory : FactoryWithActorBody
     {
         public GameObject prefub;
-        public ActorBodyManager actorBodyManager;
+
         public UndeadSmasherObjectFactory objectFactory;
         public WeaponFactory weaponFactory;
         public BehaviorFactory behaviorFactory;
@@ -45,6 +45,7 @@ namespace Assets.Code.GameObjectFactory
             Dictionary<string, string> parametres = objectFactory.actorParameters[newObjectCategory][nameObject];
 
             liveActor.weapon = weaponFactory.Create(position, parametres).GetComponent<Weapon>();
+            liveActor.weapon.bulletOptions.fraction = liveActor.fraction;
 
             var behavior = behaviorFactory.Create(otherParameters["behavior"]);
             //Debug.Log("behavior != null");
@@ -52,29 +53,24 @@ namespace Assets.Code.GameObjectFactory
             liveActor.behavior = behaviorFactory.Create(otherParameters["behavior"]);
             //Debug.Log("liveActor.behavior != null");
             //Debug.Log(liveActor.behavior != null);
-            ///////////////
-            // For model
-            BoxCollider actorCollider = newObject.GetComponent<BoxCollider>();
-            actorCollider.size = new Vector3(
-                float.Parse(otherParameters["sizeX"]),
-                float.Parse(otherParameters["sizeY"]),
-                float.Parse(otherParameters["sizeZ"])
-            );
-            actorCollider.center = new Vector3(
-                float.Parse(otherParameters["centerX"]),
-                float.Parse(otherParameters["centerY"]),
-                float.Parse(otherParameters["centerZ"])
-            );
-
-            GameObject newModel = Instantiate(
-                actorBodyManager.modelDictionary[otherParameters["model"]],
-                position,
-                Quaternion.Euler(0, 0, 0)
-            ) as GameObject;
-            newModel.transform.parent = newObject.transform;
-            ///////////////
+            
+            SetCollider(otherParameters, newObject);
+            CreateModelForActor(newObject, position, otherParameters["model"]);
 
             return newObject;
+        }
+
+        private BulletOptions GetBulletOptions(LiveActor actor)
+        {
+            BulletOptions bulletOptions = new BulletOptions();
+            //bulletOptions.behavior;
+            //bulletOptions.bulletName = actor.weapon.;
+            //bulletOptions.fraction = actor.fraction;
+            //bulletOptions.lifeTime
+
+
+            // TODO : посмотри схему
+            return bulletOptions;
         }
     }
 }

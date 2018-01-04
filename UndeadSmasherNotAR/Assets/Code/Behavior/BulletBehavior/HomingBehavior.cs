@@ -9,7 +9,8 @@ namespace Assets.Code.Behavior.BulletBehavior
     
     class HomingBehavior : IBehavior
     {
-        public EffectManager effectManager;
+        public ActorManager actorManager;
+        public GameObject target;
         public override void Execute(float deltaTime, GameObject actor)
         {
 

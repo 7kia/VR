@@ -20,19 +20,24 @@ namespace Assets.Code.Actors
         {
             cooldown = new MyTimer();
             bulletCounter = new BulletCounter();
+            bulletOptions.portionDamage = new PortionDamage();
+            bulletOptions.fraction = new Fractions.FractionValue();
         }
 
-        public void Shoot(float deltatime)
+        // Созданной пуле далее присваивается цель
+        public GameObject Shoot(float deltatime)
         {
-            cooldown.AddToTime(deltatime);
-            if (cooldown.NowTimeMoreMax())
+            if (bulletCounter.value > 0)
             {
-                cooldown.time = 0.0f;
-                bulletCounter.value -= 1;
-                objectFactory.CreateObject(owner.transform.position, bulletOptions.bulletName);
+                cooldown.AddToTime(deltatime);
+                if (cooldown.NowTimeMoreMax())
+                {
+                    cooldown.time = 0.0f;
+                    bulletCounter.value -= 1;
+                    return objectFactory.CreateObject(owner.transform.position, bulletOptions.bulletName);
+                }
             }
-
-            
+            return null;
         }
 
 
