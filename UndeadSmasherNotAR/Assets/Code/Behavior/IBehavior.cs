@@ -6,9 +6,8 @@ using UnityEngine;
 
 namespace Assets.Code
 {
-    public abstract class IBehavior : MonoBehaviour
+    public abstract class IBehavior
     {
-        public abstract void Execute(float deltaTime);
+        public abstract void Execute(float deltaTime, GameObject actor);
     }
-
 }

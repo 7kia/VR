@@ -45,8 +45,13 @@ namespace Assets.Code.GameObjectFactory
             Dictionary<string, string> parametres = objectFactory.actorParameters[newObjectCategory][nameObject];
 
             liveActor.weapon = weaponFactory.Create(position, parametres).GetComponent<Weapon>();
-            liveActor.behavior = BehaviorFactory.Create(otherParameters["behavior"]);
 
+            var behavior = behaviorFactory.Create(otherParameters["behavior"]);
+            //Debug.Log("behavior != null");
+            //Debug.Log(behavior != null);
+            liveActor.behavior = behaviorFactory.Create(otherParameters["behavior"]);
+            //Debug.Log("liveActor.behavior != null");
+            //Debug.Log(liveActor.behavior != null);
             ///////////////
             // For model
             BoxCollider actorCollider = newObject.GetComponent<BoxCollider>();

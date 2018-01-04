@@ -32,9 +32,9 @@ namespace Assets.Code.Actors
 
         void Update()// TODO : может несработать посмотри в код старой игры
         {
-            if (behavior)
+            if (behavior != null)
             {
-                behavior.Execute(Time.deltaTime);
+                behavior.Execute(Time.deltaTime, this.gameObject);
             }
             
         }

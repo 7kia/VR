@@ -13,6 +13,7 @@ namespace Assets.Code.GameObjectFactory
     {
         public GameObject prefub;
         public EffectManager effectManager;
+        public BehaviorFactory behaviorFactory;
         public GameObject Create(
             Vector3 position,
             FractionValue fraction, 
@@ -33,7 +34,7 @@ namespace Assets.Code.GameObjectFactory
             bullet.name = otherParameters["name"];
             bullet.lifeTime = float.Parse(otherParameters["lifeTime"]);
             bullet.velocity = float.Parse(otherParameters["velocity"]);
-            bullet.behavior = BehaviorFactory.Create(otherParameters["behavior"]);
+            bullet.behavior = behaviorFactory.Create(otherParameters["behavior"]);
 
             return newObject;
         }

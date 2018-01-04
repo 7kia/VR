@@ -1,4 +1,5 @@
-﻿using Assets.Code.Behavior;
+﻿using Assets.Code;
+using Assets.Code.Behavior;
 using Assets.Code.Fractions;
 using Assets.Code.GameObjectFactory;
 using System;
@@ -14,6 +15,7 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
 
     public ActorBodyManager actorBodyManager;
     public EffectManager effectManager;
+    public BehaviorFactory behaviorFactory;
     [SerializeField]
     public GameObject[] objectList;
     [SerializeField]
@@ -49,16 +51,23 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
 
     private void SetFactoryOptions()
     {
+        SetBehaviorFactory();// Важен порядок функции, эта первая
         SetWeaponFactory();
         SetBulletFactory();
         SetInanimateActorFactory();
         SetLiveActorFactory();
     }
 
+    private void SetBehaviorFactory()
+    {
+        behaviorFactory = new BehaviorFactory(effectManager);
+    }
+
     private void SetBulletFactory()
     {
         bulletFactory.prefub = objectMap["Bullet"];
         bulletFactory.effectManager = effectManager;
+        bulletFactory.behaviorFactory = behaviorFactory;
     }
 
     private void SetWeaponFactory()
@@ -80,7 +89,7 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
         liveActorFactory.prefub = objectMap["LiveActor"];
         liveActorFactory.objectFactory = this;
         liveActorFactory.effectManager = effectManager;
-        //liveActorFactory.behaviorFactory = behaviorFactory;
+        liveActorFactory.behaviorFactory = behaviorFactory;
         liveActorFactory.weaponFactory = weaponFactory;
         liveActorFactory.actorBodyManager = actorBodyManager;
     }
@@ -99,14 +108,14 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
         newObject.transform.parent = spawnLocations.transform;
         newObject.transform.position = position;
 
-        Debug.Log("GameObject Name = " + name + " position={" + newObject.transform.position.x + ", " + newObject.transform.position.y + ", " + newObject.transform.position.z + "}\n");
+        //Debug.Log("GameObject Name = " + name + " position={" + newObject.transform.position.x + ", " + newObject.transform.position.y + ", " + newObject.transform.position.z + "}\n");
 
     }
 
     private GameObject CreateUnallocatedObject(string nameObject)
     {
         GameObject newObject = null;
-        Debug.Log(nameObject);
+
         string newObjectCategory = typeToCategory[nameObject];
         Dictionary<string, string> parametres = actorParameters[newObjectCategory][nameObject];
 

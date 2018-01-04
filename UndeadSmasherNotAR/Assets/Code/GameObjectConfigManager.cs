@@ -120,7 +120,7 @@ namespace Assets.Code
                 if (!objectFactory.typeToCategory.ContainsKey(elementName))
                 {
                     objectFactory.typeToCategory.Add(pair.Key, elementName);
-                    Debug.Log("typeToCategory = " + pair.Key + " => " + elementName);
+                    //Debug.Log("typeToCategory = " + pair.Key + " => " + elementName);
                 }
             }
         }

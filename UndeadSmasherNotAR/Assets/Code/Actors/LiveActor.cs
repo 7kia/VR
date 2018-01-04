@@ -23,9 +23,9 @@ namespace Assets.Code.Actors
         // Update is called once per frame
         void Update()
         {
-            if (behavior)
+            if (behavior != null)
             {
-                behavior.Execute(Time.deltaTime);
+                behavior.Execute(Time.deltaTime, this.gameObject);
             }
 
         }
