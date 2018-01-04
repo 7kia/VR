@@ -44,7 +44,7 @@ namespace Assets.Code.LevelManagment
 
         public void Shoot()
         {
-            player.GetComponent<LiveActor>().weapon.Shoot(1.0f);
+            //player.GetComponent<LiveActor>().weapon.Shoot(1.0f);
         }
     }
 }

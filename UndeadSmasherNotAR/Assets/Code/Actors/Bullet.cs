@@ -26,26 +26,18 @@ namespace Assets.Code.Actors
 
     public class Bullet : Actor
     {
-        public float velocity;
-        public float lifeTime;
-        public IBehavior behavior;
-        public PortionDamage portionDamage;
-        public BulletOptions bulletOptions;
+        public BulletOptions bulletOptions = new BulletOptions();
 
         public Bullet()
         {
-            bulletOptions = new BulletOptions();
-            bulletOptions.portionDamage = new PortionDamage();
-            bulletOptions.fraction = new FractionValue();
-
             type.value = TypeEntity.Type.Bullet;
         }
 
         void Update()// TODO : может несработать посмотри в код старой игры
         {
-            if (behavior != null)
+            if (bulletOptions.behavior != null)
             {
-                behavior.Execute(Time.deltaTime, this.gameObject);
+                bulletOptions.behavior.Execute(Time.deltaTime, this.gameObject);
             }
             
         }

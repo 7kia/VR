@@ -26,7 +26,9 @@ namespace Assets.Code.Actors
 
         public void Attack(GameObject target, float deltaTime)
         {
+            //Debug.Log("Attack");
             GameObject createdBullet = weapon.Shoot(deltaTime);
+
             if (createdBullet)
             {
                 Bullet bullet = createdBullet.GetComponent<Bullet>();
@@ -38,18 +40,26 @@ namespace Assets.Code.Actors
 
         private void SetTargetForBullet(Bullet bullet, GameObject target)
         {
+
+            bullet.bulletOptions = weapon.bulletOptions;
+
+            //Debug.Log("bullet.bulletOptions.lifeTime = " + bullet.bulletOptions.lifeTime);
+            //Debug.Log("bullet.bulletOptions.portionDamage.damage = " + bullet.bulletOptions.portionDamage.damage);
+            //Debug.Log("bullet.bulletOptions.velocity = " + bullet.bulletOptions.velocity);
+            //Debug.Log("bullet.bulletOptions.bulletName = " + bullet.bulletOptions.bulletName);
+
             IBehavior bulletBehavior = bullet.bulletOptions.behavior;
             if (bulletBehavior.GetType() == typeof(DirectFlyingBehavior))
             {
                 DirectFlyingBehavior directFlyingBehavior = (DirectFlyingBehavior) bulletBehavior;
-                directFlyingBehavior.target = target.transform.position;
-                Debug.Log("DirectFlyingBehavior");
+                directFlyingBehavior.direction = (target.transform.position - this.transform.position).normalized;
+                //Debug.Log("DirectFlyingBehavior");
             }
             else if (bulletBehavior.GetType() == typeof(HomingBehavior))
             {
                 HomingBehavior homingBehavior = (HomingBehavior) bulletBehavior;
                 homingBehavior.target = target;
-                Debug.Log("HomingBehavior");
+                //Debug.Log("HomingBehavior");
             }
         }
 

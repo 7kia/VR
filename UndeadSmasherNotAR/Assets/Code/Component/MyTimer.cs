@@ -24,9 +24,12 @@ namespace Assets.Code.Component
         {
             if (!m_stopTimer)
             {
-                time -= Time.deltaTime;
-                if (time <= 0f)
+                Debug.Log("Time.deltaTime =" + Time.deltaTime);
+                time += Time.deltaTime;
+                if (time >= maxTime)
                 {
+                    Debug.Log("Shoot");
+                   
                     m_endTime = true;
                     StopTimer();
                 }
@@ -35,7 +38,7 @@ namespace Assets.Code.Component
 
         public void ResetTimer()
         {
-            time = maxTime;
+            time = 0.0f;
             m_endTime = false;
         }
 

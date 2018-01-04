@@ -18,22 +18,36 @@ namespace Assets.Code.Actors
 
         void Start()
         {
-            cooldown = new MyTimer();
-            bulletCounter = new BulletCounter();
-            bulletOptions.portionDamage = new PortionDamage();
-            bulletOptions.fraction = new Fractions.FractionValue();
         }
 
         // Созданной пуле далее присваивается цель
         public GameObject Shoot(float deltatime)
         {
+            //Debug.Log("deltatime = " + deltatime);
+            //Debug.Log("cooldown.maxTime = " + cooldown.maxTime);
+            //Debug.Log("bulletCounter.value = " + bulletCounter.value);
             if (bulletCounter.value > 0)
             {
+                cooldown.PlayTimer();
                 cooldown.AddToTime(deltatime);
+                //Debug.Log("Current time = " + cooldown.time);
+                //Debug.Log("Max time = " + cooldown.maxTime);
+                //cooldown.AddToTime(deltatime);
+                Debug.Log("cooldown.time = " + cooldown.time);
+                Debug.Log("cooldown.maxTime = " + cooldown.maxTime);
                 if (cooldown.NowTimeMoreMax())
                 {
-                    cooldown.time = 0.0f;
+
+                    cooldown.StopTimer();
+                    cooldown.ResetTimer();
                     bulletCounter.value -= 1;
+                    Debug.Log("Shoot");
+                    Debug.Log("deltatime = " + deltatime);
+                    Debug.Log("cooldown.time = " + cooldown.time);
+                    Debug.Log("cooldown.maxTime = " + cooldown.maxTime);
+                    Debug.Log("bulletCounter.value = " + bulletCounter.value);
+                    //Debug.Log("owner =" + (owner != null));
+                    //Debug.Log("bulletOptions =" + (bulletOptions != null));
                     return objectFactory.CreateObject(owner.transform.position, bulletOptions.bulletName);
                 }
             }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using InteractionTypePair = System.Collections.Generic.KeyValuePair<TypeEntity.Type, TypeEntity.Type>;
+using FractionPair = System.Collections.Generic.KeyValuePair<Assets.Code.Fractions.FractionValue, Assets.Code.Fractions.FractionValue>;
 
 
 namespace Assets.Code
@@ -71,6 +72,15 @@ namespace Assets.Code
 
             FractionValue firstFraction = firstActor.fraction;
             FractionValue secondFraction = secondActor.fraction;
+
+            LiveActor liveActor = first.GetComponent<LiveActor>();
+            Bullet bullet = second.GetComponent<Bullet>();
+
+            Debug.Log("liveActor.health.value = " + liveActor.health.value);
+            Debug.Log("bullet.bulletOptions.portionDamage.damage = " + bullet.bulletOptions.portionDamage.damage);
+            liveActor.health.value -= bullet.bulletOptions.portionDamage.damage;
+            Debug.Log("Bullet destroy");
+            Destroy(second);
 
             //Debug.Log("handleBulletAndLive");
             //throw new NotImplementedException();

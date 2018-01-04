@@ -45,6 +45,8 @@ namespace Assets.Code.GameObjectFactory
             Dictionary<string, string> parametres = objectFactory.actorParameters[newObjectCategory][nameObject];
 
             liveActor.weapon = weaponFactory.Create(position, parametres).GetComponent<Weapon>();
+            liveActor.weapon.owner = newObject;
+            liveActor.weapon.objectFactory = objectFactory;
             liveActor.weapon.bulletOptions.fraction = liveActor.fraction;
 
             var behavior = behaviorFactory.Create(otherParameters["behavior"]);
@@ -60,17 +62,17 @@ namespace Assets.Code.GameObjectFactory
             return newObject;
         }
 
-        private BulletOptions GetBulletOptions(LiveActor actor)
-        {
-            BulletOptions bulletOptions = new BulletOptions();
-            //bulletOptions.behavior;
-            //bulletOptions.bulletName = actor.weapon.;
-            //bulletOptions.fraction = actor.fraction;
-            //bulletOptions.lifeTime
+        //private BulletOptions GetBulletOptions(LiveActor actor)
+        //{
+        //    BulletOptions bulletOptions = new BulletOptions();
+        //    //bulletOptions.behavior;
+        //    //bulletOptions.bulletName = actor.weapon.;
+        //    //bulletOptions.fraction = actor.fraction;
+        //    //bulletOptions.lifeTime
 
 
-            // TODO : посмотри схему
-            return bulletOptions;
-        }
+        //    // TODO : посмотри схему
+        //    return bulletOptions;
+        //}
     }
 }

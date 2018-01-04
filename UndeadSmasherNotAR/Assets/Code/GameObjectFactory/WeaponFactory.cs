@@ -32,9 +32,17 @@ namespace Assets.Code.GameObjectFactory
             weapon.cooldown.time = float.Parse(otherParameters["cooldown"]);
             weapon.cooldown.maxTime = float.Parse(otherParameters["cooldown"]);
 
-            weapon.bulletCounter.value = uint.Parse(otherParameters["bulletCounter__count"]);
+            Debug.Log("weapon.cooldown.time  =" + weapon.cooldown.time);
+            Debug.Log("weapon.cooldown.maxTime =" + weapon.cooldown.maxTime);
+
+
             weapon.bulletCounter.maxValue = uint.Parse(otherParameters["bulletCounter__count"]);
+            weapon.bulletCounter.value = uint.Parse(otherParameters["bulletCounter__count"]);
             weapon.bulletCounter.isCountless = bool.Parse(otherParameters["bulletCounter__isCountless"]);
+
+            //Debug.Log("weapon.bulletCounter.value =" + weapon.bulletCounter.value);
+            //Debug.Log("weapon.bulletCounter.maxValue =" + weapon.bulletCounter.maxValue);
+            //Debug.Log("weapon.bulletCounter.isCountless =" + weapon.bulletCounter.isCountless);
 
             weapon.bulletOptions.bulletName = otherParameters["bulletFeatures__name"];
             weapon.bulletOptions.portionDamage.damage = uint.Parse(otherParameters["bulletFeatures__damage"]);

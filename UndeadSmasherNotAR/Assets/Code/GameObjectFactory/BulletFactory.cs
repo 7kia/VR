@@ -32,9 +32,6 @@ namespace Assets.Code.GameObjectFactory
 
             bullet.name = otherParameters["name"];
             bullet.fraction = fraction;
-            bullet.lifeTime = float.Parse(otherParameters["lifeTime"]);
-            bullet.velocity = float.Parse(otherParameters["velocity"]);
-            bullet.behavior = behaviorFactory.Create(otherParameters["behavior"]);
 
             SetCollider(otherParameters, newObject);
             CreateModelForActor(newObject, position, otherParameters["model"]);

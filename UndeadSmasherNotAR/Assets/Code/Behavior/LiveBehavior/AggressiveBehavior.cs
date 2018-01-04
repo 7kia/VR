@@ -31,7 +31,7 @@ namespace Assets.Code.Behavior.BulletBehavior
         {
             target = null;
             shortestDistance = float.MaxValue;
-          
+
             Transform nodeWithActors = actorManager.scene.transform;
             for (int i = 0; i < nodeWithActors.childCount; i++)
             {
@@ -50,6 +50,8 @@ namespace Assets.Code.Behavior.BulletBehavior
 
             bool noYourself = (currentActor.gameObject != actor);
             bool warringFractions = IsWarringFractions(currentActorFraction.value, actorFraction.value);
+
+
             if (noYourself && warringFractions)
             {
                 float distance = Vector3.Distance(
@@ -74,7 +76,7 @@ namespace Assets.Code.Behavior.BulletBehavior
             {
                 return false;
             }
-
+           
             return (first != second);
         }
 
