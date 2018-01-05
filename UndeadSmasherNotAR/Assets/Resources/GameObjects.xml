@@ -1,13 +1,23 @@
 <?xml version="1.0"?>
 <configData>
 	<weapons>
-		<weapon name="PlayerWeapon" cooldown="0.1" >
-			<bulletCounter bulletCounter__count="3" bulletCounter__isCountless="false" />
+		<weapon name="PlayerCobbleWeapon" cooldown="0.1" >
+			<bulletCounter bulletCounter__count="5" bulletCounter__isCountless="false" />
 			<bulletFeatures 
-				bulletFeatures__name="Arrow"
+				bulletFeatures__name="Cobble"
 				bulletFeatures__damage="1" 
 				bulletFeatures__lifeTime="5.5" 
-				bulletFeatures__velocity="30.0" 
+				bulletFeatures__velocity="5.0" 
+				bulletFeatures__behavior="DirectFlyingBehavior"
+			/>
+		</weapon>
+		<weapon name="PlayerBombWeapon" cooldown="0.1" >
+			<bulletCounter bulletCounter__count="3" bulletCounter__isCountless="false" />
+			<bulletFeatures 
+				bulletFeatures__name="Bomb"
+				bulletFeatures__damage="20" 
+				bulletFeatures__lifeTime="5.5" 
+				bulletFeatures__velocity="5.0" 
 				bulletFeatures__behavior="DirectFlyingBehavior"
 			/>
 		</weapon>
@@ -29,11 +39,21 @@
 				sizeX="1" sizeY="1" sizeZ="1"
 			/>
 		</bullet>
+		<bullet name="Cobble" model="Cobble">
+			<colliderFeatures centerX="0" centerY="0" centerZ="0"
+				sizeX="1" sizeY="1" sizeZ="1"
+			/>
+		</bullet>
+		<bullet name="Bomb" model="Bomb">
+			<colliderFeatures centerX="0" centerY="0" centerZ="0"
+				sizeX="1" sizeY="1" sizeZ="1"
+			/>
+		</bullet>
 	</bullets>
 	
 	<liveActors>
 		<liveActor name="MagicEye" health="10" model="MagicEye" 
-			fraction="Player" weapon="PlayerWeapon" behavior="ControlledBehavior">
+			fraction="Player" weapon="PlayerCobbleWeapon" behavior="ControlledBehavior">
 			<colliderFeatures centerX="0" centerY="1.264442" centerZ="0"
 				sizeX="1" sizeY="2.738399" sizeZ="1"
 			/>

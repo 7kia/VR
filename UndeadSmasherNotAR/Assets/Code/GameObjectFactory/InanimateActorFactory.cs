@@ -29,6 +29,8 @@ namespace Assets.Code.GameObjectFactory
             inanimateActor.effectManager = effectManager;
 
             inanimateActor.name = otherParameters["name"];
+            // WARNING : Порядок присваивания важен, смотри реализацию value
+            inanimateActor.health.maxValue = uint.Parse(otherParameters["health"]);
             inanimateActor.health.value = uint.Parse(otherParameters["health"]);
             inanimateActor.fraction = FractionFactory.Create(otherParameters["fraction"]);
 

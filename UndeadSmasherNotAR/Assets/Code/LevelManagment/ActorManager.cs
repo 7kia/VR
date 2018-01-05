@@ -16,7 +16,8 @@ public class ActorManager : MonoBehaviour {
 
     public bool checkActors = false;
     public static string PLAYER_ENTITY_NAME = "MagicEye";
-    public static string PLAYER_FIRST_WEAPON_NAME = "PlayerWeapon";
+    public static string PLAYER_COBBLE_WEAPON_NAME = "PlayerCobbleWeapon";
+    public static string PLAYER_BOMB_WEAPON_NAME = "PlayerBombWeapon";
     // Use this for initialization
     void Start () {
 		
@@ -37,7 +38,17 @@ public class ActorManager : MonoBehaviour {
         playerManager.player = objectFactory.CreateObject(playerPosition, PLAYER_ENTITY_NAME);
 
         // WARNING : не забудь проверить кол-во оружия
-        playerManager.weapons[0] = objectFactory.CreateObject(playerPosition, PLAYER_FIRST_WEAPON_NAME);
+        playerManager.weapons[0] = objectFactory.CreateObject(playerPosition, PLAYER_COBBLE_WEAPON_NAME);
+        playerManager.weapons[1] = objectFactory.CreateObject(playerPosition, PLAYER_BOMB_WEAPON_NAME);
+
+        for(int i = 0; i < 2; i++)
+        {
+            Weapon weapon = playerManager.weapons[i].GetComponent<Weapon>();
+            LiveActor liveActor = playerManager.player.GetComponent<LiveActor>();
+            weapon.owner = playerManager.player;
+            weapon.objectFactory = objectFactory;
+            weapon.bulletOptions.fraction = liveActor.fraction;
+        }
     }
 
     public bool MagicGeneratorIsLive()
@@ -60,11 +71,12 @@ public class ActorManager : MonoBehaviour {
         Transform nodeWithActors = scene.transform;
         for (int i = 0; i < nodeWithActors.childCount; i++)
         {
-            CheckHealthActor(nodeWithActors.GetChild(i));
+            var child = nodeWithActors.GetChild(i);
+            CheckHealthActor(ref child);
         }
     }
 
-    private void CheckHealthActor(Transform transform)
+    private void CheckHealthActor(ref Transform transform)
     {
         LiveActor liveActor = transform.GetComponent<LiveActor>();
         Bullet bullet = transform.GetComponent<Bullet>();
@@ -73,15 +85,15 @@ public class ActorManager : MonoBehaviour {
         bool destroy = false;
         if (liveActor)
         {
-            destroy = CheckHealthLiveActor(liveActor);
+            destroy = CheckHealthLiveActor(ref liveActor);
         }
         else if (bullet)
         {
-            destroy = CheckHealthBullet(bullet);
+            destroy = CheckHealthBullet(ref bullet);
         }
         else if (inanimateActor)
         {
-            destroy = CheckHealthInanimateActor(inanimateActor);
+            destroy = CheckHealthInanimateActor(ref inanimateActor);
         }
 
         if (destroy)
@@ -90,18 +102,18 @@ public class ActorManager : MonoBehaviour {
         }
     }
 
-    private bool CheckHealthInanimateActor(InanimateActor inanimateActor)
+    private static bool CheckHealthInanimateActor(ref InanimateActor inanimateActor)
     {
         return inanimateActor.health.value == 0;
     }
 
-    private bool CheckHealthBullet(Bullet bullet)
+    private static bool CheckHealthBullet(ref Bullet bullet)
     {
         return false;
     }
 
     // true - уничтожить, false - нет 
-    private bool CheckHealthLiveActor(LiveActor liveActor)
+    private static bool CheckHealthLiveActor(ref LiveActor liveActor)
     {
         FractionValue fraction = liveActor.fraction;
 

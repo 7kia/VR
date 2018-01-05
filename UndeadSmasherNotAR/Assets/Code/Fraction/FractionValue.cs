@@ -29,6 +29,8 @@ namespace Assets.Code.Fractions
             }
             else if (bullet)
             {
+                //Debug.Log(bullet);
+                //Debug.Log(bullet.fraction);
                 return bullet.fraction.value;
             }
             else if (inanimateActor)

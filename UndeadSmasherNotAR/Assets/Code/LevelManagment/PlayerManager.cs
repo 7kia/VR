@@ -12,6 +12,7 @@ namespace Assets.Code.LevelManagment
         public GameObject playerCamera;
         public GameObject player;
         public GameObject[] weapons;
+        public UndeadSmasherObjectFactory objectFactory;
 
         public Dictionary<string, Weapon> weaponStorage = new Dictionary<string, Weapon>();
 
@@ -33,6 +34,8 @@ namespace Assets.Code.LevelManagment
                 if (!weaponStorage.ContainsKey(weapons[i].name))
                 {
                     weaponStorage.Add(weapons[i].name, weapons[i].GetComponent<Weapon>());
+                    weaponStorage[weapons[i].name].owner = player;
+                    weaponStorage[weapons[i].name].objectFactory = objectFactory;
                 }
             }
         }
@@ -44,7 +47,9 @@ namespace Assets.Code.LevelManagment
 
         public void Shoot()
         {
-            //player.GetComponent<LiveActor>().weapon.Shoot(1.0f);
+            Vector3 playerPosition = player.transform.position;
+            Vector3 direction = playerCamera.transform.forward;
+            player.GetComponent<LiveActor>().Attack(direction, 1.0f);
         }
     }
 }

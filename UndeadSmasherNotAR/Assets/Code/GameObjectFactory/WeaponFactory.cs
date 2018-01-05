@@ -32,10 +32,10 @@ namespace Assets.Code.GameObjectFactory
             weapon.cooldown.time = float.Parse(otherParameters["cooldown"]);
             weapon.cooldown.maxTime = float.Parse(otherParameters["cooldown"]);
 
-            Debug.Log("weapon.cooldown.time  =" + weapon.cooldown.time);
-            Debug.Log("weapon.cooldown.maxTime =" + weapon.cooldown.maxTime);
+            //Debug.Log("weapon.cooldown.time  =" + weapon.cooldown.time);
+            //Debug.Log("weapon.cooldown.maxTime =" + weapon.cooldown.maxTime);
 
-
+            // WARNING : Порядок присваивания важен, смотри реализацию value
             weapon.bulletCounter.maxValue = uint.Parse(otherParameters["bulletCounter__count"]);
             weapon.bulletCounter.value = uint.Parse(otherParameters["bulletCounter__count"]);
             weapon.bulletCounter.isCountless = bool.Parse(otherParameters["bulletCounter__isCountless"]);

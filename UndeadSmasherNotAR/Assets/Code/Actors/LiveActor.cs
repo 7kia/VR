@@ -24,6 +24,35 @@ namespace Assets.Code.Actors
             type.value = TypeEntity.Type.Live;
         }
 
+        public void Attack(Vector3 target, float deltaTime)
+        {
+            GameObject createdBullet = weapon.Shoot(deltaTime);
+
+            if (createdBullet)
+            {
+                var shift = (target - this.transform.position).normalized * 1.5f;
+                createdBullet.transform.position += shift;
+
+                Bullet bullet = createdBullet.GetComponent<Bullet>();
+                SetTargetForBullet(bullet, target);
+            }
+        }
+
+        private void SetTargetForBullet(Bullet bullet, Vector3 target)
+        {
+            bullet.bulletOptions = weapon.bulletOptions;
+            bullet.fraction = weapon.bulletOptions.fraction;
+
+
+            IBehavior bulletBehavior = bullet.bulletOptions.behavior;
+            if (bulletBehavior.GetType() == typeof(DirectFlyingBehavior))
+            {
+                DirectFlyingBehavior directFlyingBehavior = (DirectFlyingBehavior)bulletBehavior;
+                directFlyingBehavior.direction = (target - this.transform.position).normalized;
+                //Debug.Log("DirectFlyingBehavior");
+            }
+        }
+
         public void Attack(GameObject target, float deltaTime)
         {
             //Debug.Log("Attack");

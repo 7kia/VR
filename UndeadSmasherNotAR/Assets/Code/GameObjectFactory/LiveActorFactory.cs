@@ -29,15 +29,16 @@ namespace Assets.Code.GameObjectFactory
                 Quaternion.Euler(0, 0, 0)
             ) as GameObject;
 
-            Debug.Log(prefub.name);
+            //Debug.Log(prefub.name);
             LiveActor liveActor = newObject.GetComponent<LiveActor>();
-            Debug.Log(liveActor != null);
-            Debug.Log(otherParameters["name"]);
+            //Debug.Log(liveActor != null);
+            //Debug.Log(otherParameters["name"]);
             liveActor.effectManager = effectManager;
 
             liveActor.name = otherParameters["name"];
-            liveActor.health.value = uint.Parse(otherParameters["health"]);
+            // WARNING : Порядок присваивания важен, смотри реализацию value
             liveActor.health.maxValue = uint.Parse(otherParameters["health"]);
+            liveActor.health.value = uint.Parse(otherParameters["health"]);
             liveActor.fraction = FractionFactory.Create(otherParameters["fraction"]);
 
 

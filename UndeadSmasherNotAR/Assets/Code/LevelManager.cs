@@ -17,6 +17,8 @@ namespace Assets.Code
             gameObjectConfigManager.LoadConfig("GameObjects");
             mapLoader.LoadMap("Level");
             actorManager.GeneratePlayer();
+            actorManager.playerManager.SetWeaponStorage();
+            actorManager.checkActors = true;
         }
 
         // Update is called once per frame
