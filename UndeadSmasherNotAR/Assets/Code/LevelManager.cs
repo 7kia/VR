@@ -10,12 +10,13 @@ namespace Assets.Code
 
         public MapLoader mapLoader;
         public GameObjectConfigManager gameObjectConfigManager;
+        public ActorManager actorManager;
         // Use this for initialization
         void Start()
         {
             gameObjectConfigManager.LoadConfig("GameObjects");
             mapLoader.LoadMap("Level");
-            
+            actorManager.GeneratePlayer();
         }
 
         // Update is called once per frame

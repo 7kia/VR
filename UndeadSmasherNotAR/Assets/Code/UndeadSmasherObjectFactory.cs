@@ -138,8 +138,13 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
                 );
                 break;
             case "liveActor":
-               
                 newObject = liveActorFactory.Create(
+                    spawnLocations.transform.position,
+                    parametres
+                );
+                break;
+            case "weapon":// TODO : имя?
+                newObject = weaponFactory.Create(
                     spawnLocations.transform.position,
                     parametres
                 );

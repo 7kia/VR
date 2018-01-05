@@ -45,7 +45,7 @@ namespace Assets.Code.Actors
         {
 
             bullet.bulletOptions = weapon.bulletOptions;
-
+            bullet.fraction = weapon.bulletOptions.fraction;
             //Debug.Log("bullet.bulletOptions.lifeTime = " + bullet.bulletOptions.lifeTime);
             //Debug.Log("bullet.bulletOptions.portionDamage.damage = " + bullet.bulletOptions.portionDamage.damage);
             //Debug.Log("bullet.bulletOptions.velocity = " + bullet.bulletOptions.velocity);

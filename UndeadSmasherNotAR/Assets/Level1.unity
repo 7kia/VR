@@ -245,7 +245,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 69950164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 389.5, y: 163, z: 0}
+  m_LocalPosition: {x: 389, y: 163, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -472,6 +472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapLoader: {fileID: 2020410033}
   gameObjectConfigManager: {fileID: 1316769412}
+  actorManager: {fileID: 1039689159}
 --- !u!1 &943913542
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,6 +655,8 @@ MonoBehaviour:
   effectManager: {fileID: 1879213583}
   playerManager: {fileID: 1840201624}
   scene: {fileID: 598627646}
+  objectFactory: {fileID: 2075975505}
+  checkActors: 0
 --- !u!224 &1039689160
 RectTransform:
   m_ObjectHideFlags: 0

@@ -55,12 +55,14 @@ namespace Assets.Code
 
         void handleBulletAndInanimate(GameObject first, GameObject second)
         {
-            Actor firstActor = first.GetComponent<Actor>();
-            Actor secondActor = second.GetComponent<Actor>();
+            Bullet bullet = first.GetComponent<Bullet>();
+            InanimateActor inanimateActor = second.GetComponent<InanimateActor>();
 
-            FractionValue firstFraction = firstActor.fraction;
-            FractionValue secondFraction = secondActor.fraction;
-
+            if (AggressiveBehavior.CanDestroyBlock(inanimateActor.fraction.value, bullet.fraction.value))
+            {
+                inanimateActor.health.value -= bullet.bulletOptions.portionDamage.damage;
+            }
+            Destroy(first);
             // Debug.Log("handleBulletAndInanimate");
             //throw new NotImplementedException();
         }

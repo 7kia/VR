@@ -43,26 +43,24 @@ namespace Assets.Code.Behavior.BulletBehavior
 
         private void DefineTarget(GameObject currentChild, GameObject actor)
         {
-            FractionValue actorFraction = actor.GetComponent<Actor>().fraction;
+            FractionValue.Fraction actorFraction = FractionValue.GetFraction(actor);
+            FractionValue.Fraction currentActorFraction = FractionValue.GetFraction(currentChild);
 
-            var currentActor = currentChild.GetComponent<Actor>();
-            FractionValue currentActorFraction = currentActor.fraction;
-
-            bool noYourself = (currentActor.gameObject != actor);
-            bool warringFractions = IsWarringFractions(currentActorFraction.value, actorFraction.value);
+            bool noYourself = (currentChild != actor);
+            bool warringFractions = IsWarringFractions(currentActorFraction, actorFraction);
 
 
             if (noYourself && warringFractions)
             {
                 float distance = Vector3.Distance(
                     actor.transform.position,
-                    currentActor.transform.position
+                    currentChild.transform.position
                 );
 
                 shortestDistance = Math.Min(shortestDistance, distance);
                 if (shortestDistance == distance)
                 {
-                    target = currentActor.gameObject;
+                    target = currentChild;
                 }
             }
         }
@@ -80,5 +78,12 @@ namespace Assets.Code.Behavior.BulletBehavior
             return (first != second);
         }
 
+        public static bool CanDestroyBlock(FractionValue.Fraction inanimateFraction, FractionValue.Fraction bulletFraction)
+        {
+            bool inanimateIsBlock = (inanimateFraction == FractionValue.Fraction.Neutral);
+            bool bulletIsPlauyer = (bulletFraction == FractionValue.Fraction.Player);
+
+            return (inanimateIsBlock && bulletIsPlauyer);
+        }
     }
 }

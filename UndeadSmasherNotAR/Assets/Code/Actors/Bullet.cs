@@ -10,7 +10,7 @@ namespace Assets.Code.Actors
 {
     public class BulletOptions
     {
-        public FractionValue fraction = new FractionValue();
+        public FractionValue fraction;
         public float velocity;
         public float lifeTime;
         public IBehavior behavior;
