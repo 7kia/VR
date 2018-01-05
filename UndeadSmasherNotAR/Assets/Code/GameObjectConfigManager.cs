@@ -83,6 +83,15 @@ namespace Assets.Code
         }
         #endregion
 
+        private void LoadIfNotAdd(string elementName, ref ActorNameAndParameters actorNameAndParameters)
+        {
+            if (!objectFactory.actorParameters.ContainsKey(elementName))
+            {
+                objectFactory.actorParameters.Add(elementName, actorNameAndParameters);
+                AddTypeToCategoryPairs(elementName);
+            }
+        }
+
         #region LoadWeapon
         private void LoadWeapon(XmlNode xmlDoc)
         {
@@ -107,7 +116,7 @@ namespace Assets.Code
             bulletFeaturesParameters.Add("bulletFeatures__behavior");
             subNodes.Add("bulletFeatures", bulletFeaturesParameters);
 
-            var actorNameAndParameters = ExtractParameters(
+            ActorNameAndParameters actorNameAndParameters = ExtractParameters(
                 xmlDoc,
                 groupName,
                 elementName,
@@ -116,9 +125,7 @@ namespace Assets.Code
             );
 
             Debug.Log("LoadWeapon successful");
-            objectFactory.actorParameters.Add(elementName, actorNameAndParameters);
-            AddTypeToCategoryPairs(elementName);
-            
+            LoadIfNotAdd(elementName, ref actorNameAndParameters);
         }
 
         private void AddTypeToCategoryPairs(string elementName)
@@ -163,8 +170,7 @@ namespace Assets.Code
             );
 
             Debug.Log("LoadBullet successful");
-            objectFactory.actorParameters.Add(elementName, actorNameAndParameters);
-            AddTypeToCategoryPairs(elementName);
+            LoadIfNotAdd(elementName, ref actorNameAndParameters);
         }
         #endregion
 
@@ -202,8 +208,7 @@ namespace Assets.Code
             );
 
             Debug.Log("LoadLiveActor successful");
-            objectFactory.actorParameters.Add(elementName, actorNameAndParameters);
-            AddTypeToCategoryPairs(elementName);
+            LoadIfNotAdd(elementName, ref actorNameAndParameters);
         }
 
 
@@ -240,8 +245,7 @@ namespace Assets.Code
             );
 
             Debug.Log("LoadInanimateActor successful");
-            objectFactory.actorParameters.Add(elementName, actorNameAndParameters);
-            AddTypeToCategoryPairs(elementName);
+            LoadIfNotAdd(elementName, ref actorNameAndParameters);
         }
 
 

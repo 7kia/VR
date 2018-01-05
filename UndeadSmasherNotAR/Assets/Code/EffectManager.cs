@@ -84,7 +84,8 @@ namespace Assets.Code
             }
             Destroy(first);
 
-            //Debug.Log("handleBulletAndLive");
+            Debug.Log("handleBulletAndLive");
+            // TODO : баг если здоровье = 1 то снаряд противника не срабатывает
             //throw new NotImplementedException();
         }
     }

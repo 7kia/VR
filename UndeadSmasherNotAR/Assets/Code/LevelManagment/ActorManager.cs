@@ -51,9 +51,21 @@ public class ActorManager : MonoBehaviour {
         }
     }
 
+    public void ClearScene()
+    {
+        for (int i = 0; i < scene.transform.childCount; i++)
+        {
+            var child = scene.transform.GetChild(i).gameObject;
+            if (child)
+            {
+                Destroy(child);
+            }
+        }
+    }
+
     public bool MagicGeneratorIsLive()
     {
-        return false;
+        return true;
     }
 
     public bool ContentUndead()
@@ -63,8 +75,54 @@ public class ActorManager : MonoBehaviour {
 
     public bool PlayerIsLive()
     {
-        return playerManager.player.GetComponent<LiveActor>().health.value > 0;
+        if (playerManager.player)
+        {
+            return playerManager.player.GetComponent<LiveActor>().health.value > 0;
+        }
+        return false;
     }
+
+    #region Pause
+
+    public void Pause()
+    {
+        for (int i = 0; i < scene.transform.childCount; i++)
+        {
+            var child = scene.transform.GetChild(i);
+            SetActiveState(child, false);
+        }
+    }
+
+    public void Play()
+    {
+        for (int i = 0; i < scene.transform.childCount; i++)
+        {
+            var child = scene.transform.GetChild(i);
+            SetActiveState(child, true);
+        }
+    }
+
+    private void SetActiveState(Transform child, bool isActive)
+    {
+        LiveActor liveActor = child.GetComponent<LiveActor>();
+        Bullet bullet = child.GetComponent<Bullet>();
+        InanimateActor inanimateActor = child.GetComponent<InanimateActor>();
+
+        if (liveActor)
+        {
+            liveActor.isActive = isActive;
+        }
+        else if (bullet)
+        {
+            bullet.isActive = isActive;
+        }
+        else if (inanimateActor)
+        {
+            inanimateActor.isActive = isActive;
+        }
+    }
+    #endregion
+
 
     private void CheckHealth()
     {

@@ -52,7 +52,7 @@
 	</bullets>
 	
 	<liveActors>
-		<liveActor name="MagicEye" health="10" model="MagicEye" 
+		<liveActor name="MagicEye" health="2" model="MagicEye" 
 			fraction="Player" weapon="PlayerCobbleWeapon" behavior="ControlledBehavior">
 			<colliderFeatures centerX="0" centerY="1.264442" centerZ="0"
 				sizeX="1" sizeY="2.738399" sizeZ="1"

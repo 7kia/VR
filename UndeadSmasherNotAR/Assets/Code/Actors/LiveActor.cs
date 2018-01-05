@@ -26,16 +26,19 @@ namespace Assets.Code.Actors
 
         public void Attack(Vector3 target, float deltaTime)
         {
-            GameObject createdBullet = weapon.Shoot(deltaTime);
-
-            if (createdBullet)
+            if (isActive)
             {
-                var shift = (target - this.transform.position).normalized * 1.5f;
-                createdBullet.transform.position += shift;
+                GameObject createdBullet = weapon.Shoot(deltaTime);
 
-                Bullet bullet = createdBullet.GetComponent<Bullet>();
-                SetTargetForBullet(bullet, target);
-            }
+                if (createdBullet)
+                {
+                    var shift = (target - this.transform.position).normalized * 1.5f;
+                    createdBullet.transform.position += shift;
+
+                    Bullet bullet = createdBullet.GetComponent<Bullet>();
+                    SetTargetForBullet(bullet, target);
+                }
+            }         
         }
 
         private void SetTargetForBullet(Bullet bullet, Vector3 target)
@@ -55,19 +58,21 @@ namespace Assets.Code.Actors
 
         public void Attack(GameObject target, float deltaTime)
         {
-            //Debug.Log("Attack");
-            GameObject createdBullet = weapon.Shoot(deltaTime);
-
-            if (createdBullet)
+            if (isActive)
             {
-                var shift = (target.transform.position - this.transform.position).normalized * 1.5f;
-                createdBullet.transform.position += shift;
+                //Debug.Log("Attack");
+                GameObject createdBullet = weapon.Shoot(deltaTime);
 
-                Bullet bullet = createdBullet.GetComponent<Bullet>();
+                if (createdBullet)
+                {
+                    var shift = (target.transform.position - this.transform.position).normalized * 1.5f;
+                    createdBullet.transform.position += shift;
 
-                SetTargetForBullet(bullet, target);
+                    Bullet bullet = createdBullet.GetComponent<Bullet>();
+
+                    SetTargetForBullet(bullet, target);
+                }
             }
-            
         }
 
         private void SetTargetForBullet(Bullet bullet, GameObject target)
@@ -103,10 +108,14 @@ namespace Assets.Code.Actors
         // Update is called once per frame
         void Update()
         {
-            if (behavior != null)
+            if(isActive)
             {
-                behavior.Execute(Time.deltaTime, this.gameObject);
+                if (behavior != null)
+                {
+                    behavior.Execute(Time.deltaTime, this.gameObject);
+                }
             }
+           
         }
     }
 }
