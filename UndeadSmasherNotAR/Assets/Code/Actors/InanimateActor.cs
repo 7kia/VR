@@ -9,7 +9,7 @@ namespace Assets.Code.Actors
     {
         public InanimateActor()
         {
-            type.value = TypeEntity.Type.Inanimate;
+            type = TypeEntity.Inanimate;
         }
     }
 }

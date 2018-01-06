@@ -111,7 +111,7 @@ public class ActorManager : MonoBehaviour {
 
     public bool MagicGeneratorIsLive()
     {
-        Debug.Log("magicGenerator health =" + scene.transform.GetChild(magicGeneratorIndex).GetComponent<LiveActor>().health.value);
+        //Debug.Log("magicGenerator health =" + scene.transform.GetChild(magicGeneratorIndex).GetComponent<LiveActor>().health.value);
         return scene.transform.GetChild(magicGeneratorIndex).GetComponent<LiveActor>().health.value > 0;
     }
 
@@ -130,7 +130,7 @@ public class ActorManager : MonoBehaviour {
             LiveActor liveActor = child.GetComponent<LiveActor>();
             if (liveActor)
             {
-                isUndead = (liveActor.fraction.value == FractionValue.Fraction.Undead);
+                isUndead = (liveActor.fraction == FractionValue.Fraction.Undead);
                 if(isUndead)
                 {
                     return true;
@@ -240,9 +240,9 @@ public class ActorManager : MonoBehaviour {
     // true - уничтожить, false - нет 
     private static bool CheckHealthLiveActor(ref LiveActor liveActor)
     {
-        FractionValue fraction = liveActor.fraction;
+        FractionValue.Fraction fraction = liveActor.fraction;
 
-        if (fraction.value != FractionValue.Fraction.Player)
+        if (fraction != FractionValue.Fraction.Player)
         {
             if (liveActor.health.value == 0)
             {

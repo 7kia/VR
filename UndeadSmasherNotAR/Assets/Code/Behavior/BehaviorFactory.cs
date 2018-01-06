@@ -40,7 +40,6 @@ namespace Assets.Code.Behavior
                     return controlledBehavior;
             }
             throw new NotImplementedException();
-            return null;
         }
     }
 }

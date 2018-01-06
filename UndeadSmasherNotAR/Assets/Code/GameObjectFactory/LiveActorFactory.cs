@@ -57,7 +57,7 @@ namespace Assets.Code.GameObjectFactory
             liveActor.weapon.objectFactory = objectFactory;
             liveActor.weapon.bulletOptions.fraction = liveActor.fraction;
 
-            var behavior = behaviorFactory.Create(otherParameters["behavior"]);
+            //var behavior = behaviorFactory.Create(otherParameters["behavior"]);
             //Debug.Log("behavior != null");
             //Debug.Log(behavior != null);
             liveActor.behavior = behaviorFactory.Create(otherParameters["behavior"]);

@@ -8,25 +8,19 @@ namespace Assets.Code.Fractions
 {
     public class FractionFactory
     {
-        public static FractionValue Create(string fractionName)
+        public static FractionValue.Fraction Create(string fractionName)
         {
-            FractionValue product = new FractionValue();
             switch (fractionName)
             {
                 case "Player":
-                    product.value = FractionValue.Fraction.Player;
-                    break;
+                    return FractionValue.Fraction.Player;
                 case "Undead":
-                    product.value = FractionValue.Fraction.Undead;
-                    break;
+                    return FractionValue.Fraction.Undead;
                 case "Neutral":
-                    product.value = FractionValue.Fraction.Neutral;
-                    break;
+                    return FractionValue.Fraction.Neutral;
                 default:
                     throw new NotImplementedException();
-                    break;
             }
-            return product;
         }
     }
 }

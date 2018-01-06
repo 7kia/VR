@@ -23,7 +23,6 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
     public string[] blockList;
 
     private Dictionary<string, GameObject> objectMap = new Dictionary<string, GameObject>();
-    private Dictionary<string, GameObject> blockMap = new Dictionary<string, GameObject>();
 
     // Ключ - название категории("Снаряд", например), Значение - виды("Стрела", "Бомба" и.т.д)
     public Dictionary<string, ActorNameAndParameters> actorParameters = new Dictionary<string, ActorNameAndParameters>();
@@ -127,7 +126,6 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
             case "bullet":
                 newObject = bulletFactory.Create(
                     spawnLocations.transform.position,
-                    new FractionValue(),// TODO : передай фракцию от владельца оружия
                     parametres
                 );
                 break;

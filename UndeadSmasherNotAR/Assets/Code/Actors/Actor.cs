@@ -11,8 +11,8 @@ namespace Assets.Code.Actors
     {
 
         public EffectManager effectManager;
-        public FractionValue fraction = new FractionValue();
-        public TypeEntity type = new TypeEntity();
+        public FractionValue.Fraction fraction = FractionValue.Fraction.Neutral;
+        public TypeEntity type;
         public Rigidbody physicBody;
 
         public DynamicСharacteristic<uint> health = new DynamicСharacteristic<uint>();

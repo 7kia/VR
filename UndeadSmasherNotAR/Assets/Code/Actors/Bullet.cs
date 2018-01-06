@@ -10,7 +10,7 @@ namespace Assets.Code.Actors
 {
     public class BulletOptions
     {
-        public FractionValue fraction;
+        public FractionValue.Fraction fraction;
         public float velocity;
         public float lifeTime;
         public IBehavior behavior;
@@ -30,7 +30,7 @@ namespace Assets.Code.Actors
 
         public Bullet()
         {
-            type.value = TypeEntity.Type.Bullet;
+            type = TypeEntity.Bullet;
         }
 
         void Update()// TODO : может несработать посмотри в код старой игры

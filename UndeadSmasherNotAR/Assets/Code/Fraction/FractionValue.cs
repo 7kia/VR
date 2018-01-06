@@ -15,8 +15,6 @@ namespace Assets.Code.Fractions
             Neutral
         }
 
-        public Fraction value = Fraction.Neutral;
-
         public static Fraction GetFraction(GameObject gameObject)
         {
             LiveActor liveActor = gameObject.transform.GetComponent<LiveActor>();
@@ -25,17 +23,17 @@ namespace Assets.Code.Fractions
 
             if (liveActor)
             {
-                return liveActor.fraction.value;
+                return liveActor.fraction;
             }
             else if (bullet)
             {
                 //Debug.Log(bullet);
                 //Debug.Log(bullet.fraction);
-                return bullet.fraction.value;
+                return bullet.fraction;
             }
             else if (inanimateActor)
             {
-                return inanimateActor.fraction.value;
+                return inanimateActor.fraction;
             }
 
             return Fraction.Neutral;

@@ -5,8 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using InteractionTypePair = System.Collections.Generic.KeyValuePair<TypeEntity.Type, TypeEntity.Type>;
-using FractionPair = System.Collections.Generic.KeyValuePair<Assets.Code.Fractions.FractionValue, Assets.Code.Fractions.FractionValue>;
+using InteractionTypePair = System.Collections.Generic.KeyValuePair<Assets.Code.Actors.TypeEntity, Assets.Code.Actors.TypeEntity>;
+using FractionPair = System.Collections.Generic.KeyValuePair<Assets.Code.Fractions.FractionValue.Fraction, Assets.Code.Fractions.FractionValue.Fraction>;
 using Assets.Code.Behavior.BulletBehavior;
 
 namespace Assets.Code
@@ -20,8 +20,8 @@ namespace Assets.Code
         // Use this for initialization
         void Start()
         {
-            handlers.Add(new InteractionTypePair(TypeEntity.Type.Bullet, TypeEntity.Type.Inanimate), handleBulletAndInanimate);
-            handlers.Add(new InteractionTypePair(TypeEntity.Type.Bullet, TypeEntity.Type.Live), handleBulletAndLive);
+            handlers.Add(new InteractionTypePair(TypeEntity.Bullet, TypeEntity.Inanimate), handleBulletAndInanimate);
+            handlers.Add(new InteractionTypePair(TypeEntity.Bullet, TypeEntity.Live), handleBulletAndLive);
 
 
         }
@@ -34,14 +34,11 @@ namespace Assets.Code
 
         public void handleCollision(GameObject first, GameObject second)
         {
-            Actor firstActor = first.GetComponent<Actor>();
-            Actor secondActor = second.GetComponent<Actor>();
+            TypeEntity firstType = TypeEntityFunctions.GetType(first);
+            TypeEntity secondType = TypeEntityFunctions.GetType(second);
 
-            TypeEntity firstType = firstActor.type;
-            TypeEntity secondType = secondActor.type;
-
-            InteractionTypePair typePair = new InteractionTypePair(firstType.value, secondType.value);
-            InteractionTypePair reverseTypePair = new InteractionTypePair(secondType.value, firstType.value);
+            InteractionTypePair typePair = new InteractionTypePair(firstType, secondType);
+            InteractionTypePair reverseTypePair = new InteractionTypePair(secondType, firstType);
 
             if (handlers.ContainsKey(typePair))
             {
@@ -58,7 +55,13 @@ namespace Assets.Code
             Bullet bullet = first.GetComponent<Bullet>();
             InanimateActor inanimateActor = second.GetComponent<InanimateActor>();
 
-            if (AggressiveBehavior.CanDestroyBlock(inanimateActor.fraction.value, bullet.fraction.value))
+            Debug.Log(first.name);
+            Debug.Log(bullet != null);
+            Debug.Log(second.name);
+            Debug.Log(inanimateActor != null);
+
+
+            if (AggressiveBehavior.CanDestroyBlock(inanimateActor.fraction, bullet.fraction))
             {
                 inanimateActor.health.value -= bullet.bulletOptions.portionDamage.damage;
             }
@@ -69,16 +72,13 @@ namespace Assets.Code
 
         private void handleBulletAndLive(GameObject first, GameObject second)
         {
-            Actor firstActor = first.GetComponent<Actor>();
-            Actor secondActor = second.GetComponent<Actor>();
-
-            FractionValue firstFraction = firstActor.fraction;
-            FractionValue secondFraction = secondActor.fraction;
+            FractionValue.Fraction firstFraction = FractionValue.GetFraction(first);
+            FractionValue.Fraction secondFraction = FractionValue.GetFraction(second);
 
             Bullet bullet = first.GetComponent<Bullet>();
             LiveActor liveActor = second.GetComponent<LiveActor>();
 
-            if (AggressiveBehavior.IsWarringFractions(bullet.fraction.value, liveActor.fraction.value))
+            if (AggressiveBehavior.IsWarringFractions(bullet.fraction, liveActor.fraction))
             {
                 liveActor.health.value -= bullet.bulletOptions.portionDamage.damage;
             }

@@ -21,7 +21,7 @@ namespace Assets.Code.Actors
 
         public LiveActor()
         {
-            type.value = TypeEntity.Type.Live;
+            type = TypeEntity.Live;
         }
 
         public void Attack(Vector3 target, float deltaTime)
@@ -36,6 +36,7 @@ namespace Assets.Code.Actors
                     createdBullet.transform.position += shift;
 
                     Bullet bullet = createdBullet.GetComponent<Bullet>();
+                    bullet.fraction = fraction;
                     SetTargetForBullet(bullet, target);
                 }
             }         
@@ -69,7 +70,7 @@ namespace Assets.Code.Actors
                     createdBullet.transform.position += shift;
 
                     Bullet bullet = createdBullet.GetComponent<Bullet>();
-
+                    bullet.fraction = fraction;
                     SetTargetForBullet(bullet, target);
                 }
             }

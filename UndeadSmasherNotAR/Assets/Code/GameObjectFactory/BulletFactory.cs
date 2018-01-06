@@ -16,7 +16,6 @@ namespace Assets.Code.GameObjectFactory
         public BehaviorFactory behaviorFactory;
         public GameObject Create(
             Vector3 position,
-            FractionValue fraction, 
             Dictionary<string, string> otherParameters
         )
         {
@@ -31,7 +30,6 @@ namespace Assets.Code.GameObjectFactory
             bullet.effectManager = effectManager;
 
             bullet.name = otherParameters["name"];
-            bullet.fraction = fraction;
 
             SetCollider(otherParameters, newObject);
             CreateModelForActor(newObject, position, otherParameters["model"]);
