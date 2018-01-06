@@ -9,6 +9,7 @@ public class GameStateManager : MonoBehaviour {
 
     public enum GameState
     {
+        NotLoad,
         Play,
         Pause,
         Defeat,
@@ -22,7 +23,7 @@ public class GameStateManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (nowPause)
+        if (!nowPause)
         {
 
         }
@@ -30,10 +31,11 @@ public class GameStateManager : MonoBehaviour {
 
     public GameState GetGameState()
     {
-        if (nowPause)
+        if (!nowPause)
         {
             if (!actorManager.MagicGeneratorIsLive())
             {
+                Debug.Log("!MagicGeneratorIsLive");
                 //if (actorManager.ContentUndead())
                 //{
                 //    return GameState.Victory

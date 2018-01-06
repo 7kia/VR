@@ -14,7 +14,10 @@ public class ActorManager : MonoBehaviour {
     public GameObject scene;
     public UndeadSmasherObjectFactory objectFactory;
 
+    private int magicGeneratorIndex = 0;
+
     public bool checkActors = false;
+    public static string MAGIC_GENERATOR_NAME = "MagicGenerator";
     public static string PLAYER_ENTITY_NAME = "MagicEye";
     public static string PLAYER_COBBLE_WEAPON_NAME = "PlayerCobbleWeapon";
     public static string PLAYER_BOMB_WEAPON_NAME = "PlayerBombWeapon";
@@ -31,6 +34,23 @@ public class ActorManager : MonoBehaviour {
         }
 	}
 
+    public void FindMagicGenerator()
+    {
+        for (int i = 0; i < scene.transform.childCount; i++)
+        {
+            var child = scene.transform.GetChild(i).gameObject;
+            if (child)
+            {
+                if(child.name == MAGIC_GENERATOR_NAME)
+                {
+                    magicGeneratorIndex = i;
+                    return;
+                }
+            }
+        }
+        throw new Exception("Magic generator not found");
+    }
+
     public void GeneratePlayer()
     {
         Vector3 playerPosition = playerManager.playerCamera.transform.position;
@@ -38,6 +58,7 @@ public class ActorManager : MonoBehaviour {
         playerManager.player = objectFactory.CreateObject(playerPosition, PLAYER_ENTITY_NAME);
 
         // WARNING : не забудь проверить кол-во оружия
+        // TODO : после переигрывания не работает оружие, нужно ссылаться по индексу, а не по указателю
         playerManager.weapons[0] = objectFactory.CreateObject(playerPosition, PLAYER_COBBLE_WEAPON_NAME);
         playerManager.weapons[1] = objectFactory.CreateObject(playerPosition, PLAYER_BOMB_WEAPON_NAME);
 
@@ -51,8 +72,32 @@ public class ActorManager : MonoBehaviour {
         }
     }
 
+    public uint GetAward()
+    {
+        uint award = 0;
+        if(!MagicGeneratorIsLive())
+        {
+            award++;
+            if (!ContentUndead())
+            {
+                award++;
+            }
+            if(playerManager.RemainedBullet())
+            {
+                award++;
+            }
+            return award;
+        }
+        else
+        {
+            throw new Exception("Award not give if magic generator not destroy");
+        }
+
+    }
+
     public void ClearScene()
     {
+        
         for (int i = 0; i < scene.transform.childCount; i++)
         {
             var child = scene.transform.GetChild(i).gameObject;
@@ -61,16 +106,38 @@ public class ActorManager : MonoBehaviour {
                 Destroy(child);
             }
         }
+        magicGeneratorIndex = -1;
     }
 
     public bool MagicGeneratorIsLive()
     {
-        return true;
+        Debug.Log("magicGenerator health =" + scene.transform.GetChild(magicGeneratorIndex).GetComponent<LiveActor>().health.value);
+        return scene.transform.GetChild(magicGeneratorIndex).GetComponent<LiveActor>().health.value > 0;
     }
 
     public bool ContentUndead()
     {
-        return false;
+        bool isUndead = false;
+        for (int i = 0; i < scene.transform.childCount; i++)
+        {
+            var child = scene.transform.GetChild(i).gameObject;
+
+            if (child.name == MAGIC_GENERATOR_NAME)
+            {
+                continue;
+            }
+
+            LiveActor liveActor = child.GetComponent<LiveActor>();
+            if (liveActor)
+            {
+                isUndead = (liveActor.fraction.value == FractionValue.Fraction.Undead);
+                if(isUndead)
+                {
+                    return true;
+                }
+            }
+        }
+        return isUndead;
     }
 
     public bool PlayerIsLive()
@@ -154,7 +221,7 @@ public class ActorManager : MonoBehaviour {
             destroy = CheckHealthInanimateActor(ref inanimateActor);
         }
 
-        if (destroy)
+        if (destroy && (transform.name != MAGIC_GENERATOR_NAME))
         {
             Destroy(transform.gameObject);
         }
@@ -182,6 +249,10 @@ public class ActorManager : MonoBehaviour {
                 return true;
             }
         }
+        //if((fraction.value == FractionValue.Fraction.Undead) && (liveActor.))
+        //{
+
+        //}
         return false;
     }
 }

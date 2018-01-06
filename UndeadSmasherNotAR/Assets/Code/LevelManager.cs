@@ -15,6 +15,8 @@ namespace Assets.Code
         public ActorManager actorManager;
         public GameStateManager gameStateManager;
         public PlayerInterface.PlayerInterface playerWindows;
+
+        public GameStateManager.GameState gameState = GameStateManager.GameState.NotLoad;
         // Use this for initialization
         void Start()
         {
@@ -24,54 +26,70 @@ namespace Assets.Code
         // Update is called once per frame
         void Update()
         {
-            var gameState = gameStateManager.GetGameState();
-            switch (gameState)
+            if ((gameState != GameStateManager.GameState.Defeat)
+                && (gameState != GameStateManager.GameState.Victory)
+                && (gameState != GameStateManager.GameState.NotLoad))
             {
-                case GameStateManager.GameState.Play:
-                    actorManager.Play();
-                    break;
-                case GameStateManager.GameState.Pause:
-                    actorManager.Pause();
-                    break;
-                case GameStateManager.GameState.Defeat:
-                    actorManager.Pause();
-                    playerWindows.defeatPanel.SetActive(true);
-                    playerWindows.SetInteractiveButtons(false);
-                    break;
-                case GameStateManager.GameState.Victory:
-                    actorManager.Pause();
-                    playerWindows.victoryPanel.SetActive(true);
-                    playerWindows.SetInteractiveButtons(false);
-                    break;
+                gameState = gameStateManager.GetGameState();
+                switch (gameState)
+                {
+                    case GameStateManager.GameState.Play:
+                        gameStateManager.nowPause = false;
+                        actorManager.Play();
+                        break;
+                    case GameStateManager.GameState.Pause:
+                        gameStateManager.nowPause = true;
+                        actorManager.Pause();
+                        break;
+                    case GameStateManager.GameState.Defeat:
+                        actorManager.Pause();
+                        playerWindows.defeatPanel.SetActive(true);
+                        playerWindows.SetInteractiveButtons(false);
+                        break;
+                    case GameStateManager.GameState.Victory:
+                        actorManager.Pause();
+                        playerWindows.victoryPanel.SetActive(true);
+                        playerWindows.SetInteractiveButtons(false);
+                        playerWindows.SetAwardValue(actorManager.GetAward());
+                        break;
+                }
             }
+            
         }
 
         public void SwitchPauseState()
         {
-            var gameState = gameStateManager.GetGameState();
-            if (gameState == GameStateManager.GameState.Pause)
+            gameState = gameStateManager.GetGameState();
+            if (gameState == GameStateManager.GameState.Play)
             {
                 actorManager.Pause();
                 playerWindows.SetPauseState(true);
+                gameStateManager.nowPause = true;
             }
             else
             {
                 actorManager.Play();
                 playerWindows.SetPauseState(false);
+                gameStateManager.nowPause = false;
             }
         }
 
         public void CreateLevel()
         {
+            gameState = GameStateManager.GameState.NotLoad;
+
             ResetPlayerWindowStates();
             ClearLevel();
             gameObjectConfigManager.LoadConfig("GameObjects");
             mapLoader.LoadMap("Level");
+            actorManager.FindMagicGenerator();
             actorManager.GeneratePlayer();
             actorManager.playerManager.SetWeaponStorage();
             actorManager.checkActors = true;
 
-            gameStateManager.nowPause = true;
+            gameStateManager.nowPause = false;
+
+            gameState = GameStateManager.GameState.Play;
         }
 
         private void ResetPlayerWindowStates()

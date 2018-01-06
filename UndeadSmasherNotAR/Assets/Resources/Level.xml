@@ -63,7 +63,7 @@
 		</level>
 	</blockMap>
 	<objects>
-	  <object name="SkeletonArcher" x="3.63" y="1.85" z="0.49" />
-	  
+		<object name="MagicGenerator" x="0.765" y="2" z="3.829" />
+		<object name="SkeletonArcher" x="3.759" y="1.832" z="3.771" />
 	</objects>
 </levelData>

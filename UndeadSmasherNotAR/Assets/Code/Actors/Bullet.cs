@@ -35,11 +35,15 @@ namespace Assets.Code.Actors
 
         void Update()// TODO : может несработать посмотри в код старой игры
         {
-            if (bulletOptions.behavior != null)
+            if (isActive)
             {
-                bulletOptions.behavior.Execute(Time.deltaTime, this.gameObject);
+                if (bulletOptions.behavior != null)
+                {
+                    bulletOptions.behavior.Execute(Time.deltaTime, this.gameObject);
+                }
+
             }
-            
+
         }
     }
 }

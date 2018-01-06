@@ -52,10 +52,16 @@
 	</bullets>
 	
 	<liveActors>
-		<liveActor name="MagicEye" health="2" model="MagicEye" 
+		<liveActor name="MagicEye" health="200" model="MagicEye" 
 			fraction="Player" weapon="PlayerCobbleWeapon" behavior="ControlledBehavior">
 			<colliderFeatures centerX="0" centerY="1.264442" centerZ="0"
 				sizeX="1" sizeY="2.738399" sizeZ="1"
+			/>
+		</liveActor>
+		<liveActor name="MagicGenerator" health="2" model="MagicGenerator" 
+			fraction="Undead" weapon="SkeletonArcherWeapon" behavior="AggressiveBehavior">
+			<colliderFeatures centerX="0.01863956" centerY="1.173308" centerZ="-0.04556704"
+				sizeX="2.06254" sizeY="2.091134" sizeZ="2.002477"
 			/>
 		</liveActor>
 		<liveActor name="SkeletonArcher" health="1" model="SkeletonArcher" 

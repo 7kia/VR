@@ -46,7 +46,13 @@ namespace Assets.Code.GameObjectFactory
             string newObjectCategory = objectFactory.typeToCategory[nameObject];
             Dictionary<string, string> parametres = objectFactory.actorParameters[newObjectCategory][nameObject];
 
-            liveActor.weapon = weaponFactory.Create(position, parametres).GetComponent<Weapon>();
+
+            var weaponObject = weaponFactory.Create(position, parametres);
+            weaponObject.transform.parent = objectFactory.spawnLocations.transform;
+            weaponObject.transform.position = position;
+
+
+            liveActor.weapon = weaponObject.GetComponent<Weapon>();
             liveActor.weapon.owner = newObject;
             liveActor.weapon.objectFactory = objectFactory;
             liveActor.weapon.bulletOptions.fraction = liveActor.fraction;

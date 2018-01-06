@@ -17,6 +17,8 @@ namespace Assets.Code.PlayerInterface
         public GameObject bombWeaponButton;
         public GameObject shootButton;
 
+
+
         public void ResetPlayerWindowStates()
         {
             defeatPanel.active = false;
@@ -36,6 +38,19 @@ namespace Assets.Code.PlayerInterface
             cobbleWeaponButton.GetComponent<Button>().interactable = interactive;
             bombWeaponButton.GetComponent<Button>().interactable = interactive;
             shootButton.GetComponent<Button>().interactable = interactive;
+        }
+
+        public void SetAwardValue(uint award)
+        {
+            var awardPanel = victoryPanel.transform.Find("AwardPanel");
+            for (int i = 0; i < awardPanel.transform.childCount; i++)
+            {
+                var child = awardPanel.transform.GetChild(i).gameObject;
+                if (child)
+                {
+                    child.GetComponent<Toggle>().isOn = ((i+1) <= award);
+                }
+            }
         }
         //public GameObject pausePanel;
     }

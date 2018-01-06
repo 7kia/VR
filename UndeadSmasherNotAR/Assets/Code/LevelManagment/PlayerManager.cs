@@ -11,6 +11,7 @@ namespace Assets.Code.LevelManagment
     {
         public GameObject playerCamera;
         public GameObject player;
+        public GameObject directionObject;
         public GameObject[] weapons;
         public UndeadSmasherObjectFactory objectFactory;
 
@@ -23,7 +24,21 @@ namespace Assets.Code.LevelManagment
 
         void Update()
         {
+            if(player)
+            {
+                LiveActor liveActor = player.GetComponent<LiveActor>();
+                if(liveActor.isActive)
+                {
+                    player.transform.position = playerCamera.transform.position;
+                    player.transform.rotation = playerCamera.transform.rotation;
+                    player.transform.up = playerCamera.transform.up;
+                    player.transform.forward = playerCamera.transform.forward;
 
+                    //playerCamera.transform.position = liveActor.transform.position;
+                    //playerCamera.transform.rotation = liveActor.transform.rotation;
+                    //playerCamera.transform.up = liveActor.transform.up;
+                }
+            }
         }
 
 
@@ -47,9 +62,20 @@ namespace Assets.Code.LevelManagment
 
         public void Shoot()
         {
-            Vector3 playerPosition = player.transform.position;
-            Vector3 direction = playerCamera.transform.forward;
-            player.GetComponent<LiveActor>().Attack(direction, 1.0f);
+            player.GetComponent<LiveActor>().Attack(directionObject.transform.position, 1.0f);
+        }
+
+        public bool RemainedBullet()
+        {
+            for(int i = 0; i < weapons.Length; ++i)
+            {
+                var weapon = weapons[i].GetComponent<Weapon>();
+                if(weapon.bulletCounter.value > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
