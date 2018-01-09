@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33367963019476218}
   - component: {fileID: 65568639726410854}
   - component: {fileID: 23288410495660648}
-  - component: {fileID: 54073539731842142}
   - component: {fileID: 114978688179886648}
   m_Layer: 0
   m_Name: Bullet
@@ -85,21 +84,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1231073801264148}
   m_Mesh: {fileID: 0}
---- !u!54 &54073539731842142
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231073801264148}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &65568639726410854
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -124,5 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectManager: {fileID: 0}
-  physicBody: {fileID: 54073539731842142}
+  fraction: 2
+  type: 2
+  physicBody: {fileID: 0}
   isActive: 0

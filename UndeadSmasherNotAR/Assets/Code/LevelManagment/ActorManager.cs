@@ -1,8 +1,6 @@
 ﻿using Assets.Code;
 using Assets.Code.Actors;
 using Assets.Code.LevelManagment;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Assets.Code.Fractions;
@@ -72,6 +70,8 @@ public class ActorManager : MonoBehaviour {
         }
     }
 
+
+
     public uint GetAward()
     {
         uint award = 0;
@@ -140,6 +140,7 @@ public class ActorManager : MonoBehaviour {
         return isUndead;
     }
 
+    #region Player
     public bool PlayerIsLive()
     {
         if (playerManager.player)
@@ -148,6 +149,46 @@ public class ActorManager : MonoBehaviour {
         }
         return false;
     }
+
+    public uint GetPlayerHealth()
+    {
+        if (playerManager.player)
+        {
+            return playerManager.player.GetComponent<LiveActor>().health.value;
+        }
+        throw new Exception("Player not create");
+    }
+
+    public uint GetPlayerMaxHealth()
+    {
+        if (playerManager.player)
+        {
+            return playerManager.player.GetComponent<LiveActor>().health.maxValue;
+        }
+        throw new Exception("Player not create");
+    }
+
+    public uint GetPlayerBulletCount(PlayerManager.PlayerWeapon weaponType)
+    {
+        if (playerManager.player)
+        {
+            switch(weaponType)
+            {
+                case PlayerManager.PlayerWeapon.BombWeapon:
+                    return playerManager.weaponStorage[PLAYER_BOMB_WEAPON_NAME].bulletCounter.value;
+                    break;
+                case PlayerManager.PlayerWeapon.CobbleWeapon:
+                    return playerManager.weaponStorage[PLAYER_COBBLE_WEAPON_NAME].bulletCounter.value;
+                    break;
+            }
+            throw new Exception("No \"" + weaponType + "\" weapon");
+        }
+        throw new Exception("Player not create");
+    }
+
+    #endregion
+
+
 
     #region Pause
 

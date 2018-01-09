@@ -14,6 +14,7 @@ public class ActorBodyManager : MonoBehaviour {
             if (!modelDictionary.ContainsKey(models[i].name))
             {
                 modelDictionary.Add(models[i].name, models[i]);
+                Debug.Log(models[i].name);
             }
         }
     }

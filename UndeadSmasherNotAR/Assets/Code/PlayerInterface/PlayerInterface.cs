@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +14,9 @@ namespace Assets.Code.PlayerInterface
         public GameObject bombWeaponButton;
         public GameObject shootButton;
 
-
+        public GameObject playerHealthBar;
+        public GameObject cobbleCounter;
+        public GameObject bombCounter;
 
         public void ResetPlayerWindowStates()
         {
@@ -53,5 +52,26 @@ namespace Assets.Code.PlayerInterface
             }
         }
         //public GameObject pausePanel;
+
+        public void SetHealthBarState(uint value, uint maxValue)
+        {
+            playerHealthBar.GetComponent<Text>().text = value.ToString() + '/' + maxValue.ToString();
+        }
+
+        public void SetBulletCounterState(uint value, LevelManagment.PlayerManager.PlayerWeapon weapon)
+        {
+            switch(weapon)
+            {
+                case LevelManagment.PlayerManager.PlayerWeapon.BombWeapon:
+                    bombCounter.GetComponent<Text>().text = value.ToString();
+                    break;
+                case LevelManagment.PlayerManager.PlayerWeapon.CobbleWeapon:
+                    cobbleCounter.GetComponent<Text>().text = value.ToString();
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+
+        }
     }
 }

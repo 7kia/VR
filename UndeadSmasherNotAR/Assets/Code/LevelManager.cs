@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Assets.Code.PlayerInterface;
+using Assets.Code.LevelManagment;
 
 namespace Assets.Code
 {
@@ -30,6 +31,8 @@ namespace Assets.Code
                 && (gameState != GameStateManager.GameState.Victory)
                 && (gameState != GameStateManager.GameState.NotLoad))
             {
+                UpdatePlayerInterface();
+
                 gameState = gameStateManager.GetGameState();
                 switch (gameState)
                 {
@@ -55,6 +58,21 @@ namespace Assets.Code
                 }
             }
             
+        }
+
+        private void UpdatePlayerInterface()
+        {
+            playerWindows.SetHealthBarState(actorManager.GetPlayerHealth(), actorManager.GetPlayerMaxHealth());
+            SetPlayerBulletCounterState(PlayerManager.PlayerWeapon.CobbleWeapon);
+            SetPlayerBulletCounterState(PlayerManager.PlayerWeapon.BombWeapon);
+        }
+
+        private void SetPlayerBulletCounterState(PlayerManager.PlayerWeapon weapon)
+        {
+            playerWindows.SetBulletCounterState(
+                actorManager.GetPlayerBulletCount(weapon),
+                weapon
+            );
         }
 
         public void SwitchPauseState()

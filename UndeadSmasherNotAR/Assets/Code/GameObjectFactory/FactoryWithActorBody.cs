@@ -12,6 +12,14 @@ public class FactoryWithActorBody : MonoBehaviour {
         string modelName
     )
     {
+        if (!actorBodyManager.modelDictionary.ContainsKey(modelName))
+        {
+            foreach(var key in actorBodyManager.modelDictionary.Keys)
+            {
+                Debug.Log(key);
+            }
+
+        }
         GameObject newModel = Instantiate(
                actorBodyManager.modelDictionary[modelName],
                position,

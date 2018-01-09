@@ -9,6 +9,12 @@ namespace Assets.Code.LevelManagment
 {
     public class PlayerManager : MonoBehaviour
     {
+        public enum PlayerWeapon
+        {
+            CobbleWeapon,
+            BombWeapon
+        }
+
         public GameObject playerCamera;
         public GameObject player;
         public GameObject directionObject;
