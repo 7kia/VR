@@ -73,11 +73,12 @@ namespace Assets.Code
             {
                 if(signToNameBlock.ContainsKey(blocks[i].ToString()))
                 {
+                    
                     objectFactory.CreateBlock(
                         new Vector3(i, high, width),
                         signToNameBlock[blocks[i].ToString()]
                     );
-                    Debug.Log("Create block \"" + signToNameBlock[blocks[i].ToString()] + "\"");
+                    //Debug.Log("Create block \"" + signToNameBlock[blocks[i].ToString()] + "\"");
                 }
                
             }
