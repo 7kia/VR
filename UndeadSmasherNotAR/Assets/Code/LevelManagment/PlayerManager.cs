@@ -68,7 +68,11 @@ namespace Assets.Code.LevelManagment
 
         public void Shoot()
         {
-            player.GetComponent<LiveActor>().Attack(directionObject.transform.position, 1.0f);
+            player.GetComponent<LiveActor>().Attack(
+                directionObject.transform.position, 
+                player.transform.rotation, 
+                1.0f
+            );
         }
 
         public bool RemainedBullet()

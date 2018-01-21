@@ -53,12 +53,12 @@ public class ActorManager : MonoBehaviour {
     {
         Vector3 playerPosition = playerManager.playerCamera.transform.position;
 
-        playerManager.player = objectFactory.CreateObject(playerPosition, PLAYER_ENTITY_NAME);
+        playerManager.player = objectFactory.CreateObject(playerPosition, new Quaternion(), PLAYER_ENTITY_NAME);
 
         // WARNING : не забудь проверить кол-во оружия
         // TODO : после переигрывания не работает оружие, нужно ссылаться по индексу, а не по указателю
-        playerManager.weapons[0] = objectFactory.CreateObject(playerPosition, PLAYER_COBBLE_WEAPON_NAME);
-        playerManager.weapons[1] = objectFactory.CreateObject(playerPosition, PLAYER_BOMB_WEAPON_NAME);
+        playerManager.weapons[0] = objectFactory.CreateObject(playerPosition, new Quaternion(), PLAYER_COBBLE_WEAPON_NAME);
+        playerManager.weapons[1] = objectFactory.CreateObject(playerPosition, new Quaternion(), PLAYER_BOMB_WEAPON_NAME);
 
         for(int i = 0; i < 2; i++)
         {

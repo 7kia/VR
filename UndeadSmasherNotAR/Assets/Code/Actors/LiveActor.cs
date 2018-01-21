@@ -24,22 +24,35 @@ namespace Assets.Code.Actors
             type = TypeEntity.Live;
         }
 
-        public void Attack(Vector3 target, float deltaTime)
+
+        #region Attack
+        public void Attack(Vector3 target, Quaternion rotation, float deltaTime)
         {
             if (isActive)
             {
-                GameObject createdBullet = weapon.Shoot(deltaTime);
+                RotateToTarget(target);
 
+                GameObject createdBullet = weapon.Shoot(deltaTime, rotation);
                 if (createdBullet)
                 {
-                    var shift = (target - this.transform.position).normalized * 1.5f;
-                    createdBullet.transform.position += shift;
-
-                    Bullet bullet = createdBullet.GetComponent<Bullet>();
-                    bullet.fraction = fraction;
-                    SetTargetForBullet(bullet, target);
+                    SetTargetOption(ref createdBullet, target);
                 }
             }         
+        }
+
+        public void Attack(GameObject target, float deltaTime)
+        {
+            Attack(target.transform.position, target.transform.rotation, deltaTime);
+        }
+
+        private void SetTargetOption(ref GameObject createdBullet, Vector3 target)
+        {
+            var shift = (target - this.transform.position).normalized * 1.5f;
+            createdBullet.transform.position += shift;
+
+            Bullet bullet = createdBullet.GetComponent<Bullet>();
+            bullet.fraction = fraction;
+            SetTargetForBullet(bullet, target);
         }
 
         private void SetTargetForBullet(Bullet bullet, Vector3 target)
@@ -56,24 +69,16 @@ namespace Assets.Code.Actors
                 //Debug.Log("DirectFlyingBehavior");
             }
         }
+        #endregion
 
-        public void Attack(GameObject target, float deltaTime)
+        public void RotateToTarget(Vector3 target)
         {
-            if (isActive)
-            {
-                //Debug.Log("Attack");
-                GameObject createdBullet = weapon.Shoot(deltaTime);
+            transform.LookAt(target);
+            var newQuatrnion = transform.rotation;
+            newQuatrnion.x = 0.0f;
+            newQuatrnion.z = 0.0f;
 
-                if (createdBullet)
-                {
-                    var shift = (target.transform.position - this.transform.position).normalized * 1.5f;
-                    createdBullet.transform.position += shift;
-
-                    Bullet bullet = createdBullet.GetComponent<Bullet>();
-                    bullet.fraction = fraction;
-                    SetTargetForBullet(bullet, target);
-                }
-            }
+            transform.rotation = newQuatrnion;
         }
 
         private void SetTargetForBullet(Bullet bullet, GameObject target)

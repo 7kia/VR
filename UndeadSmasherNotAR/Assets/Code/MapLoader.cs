@@ -108,7 +108,7 @@ namespace Assets.Code
                 float.Parse(GetAtribute(ref xmlNode, "z"))
             );
 
-            objectFactory.CreateObject(position, name);
+            objectFactory.CreateObject(position, new Quaternion(), name);
 
            
         }

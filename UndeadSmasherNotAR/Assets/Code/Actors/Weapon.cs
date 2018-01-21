@@ -21,7 +21,7 @@ namespace Assets.Code.Actors
         }
 
         // Созданной пуле далее присваивается цель
-        public GameObject Shoot(float deltatime)
+        public GameObject Shoot(float deltatime, Quaternion rotation)
         {
             //Debug.Log("deltatime = " + deltatime);
             //Debug.Log("cooldown.maxTime = " + cooldown.maxTime);
@@ -48,7 +48,7 @@ namespace Assets.Code.Actors
                     //Debug.Log("bulletCounter.value = " + bulletCounter.value);
                     //Debug.Log("owner =" + (owner != null));
                     //Debug.Log("bulletOptions =" + (bulletOptions != null));
-                    return objectFactory.CreateObject(owner.transform.position, bulletOptions.bulletName);
+                    return objectFactory.CreateObject(owner.transform.position, rotation, bulletOptions.bulletName);
                 }
             }
             return null;

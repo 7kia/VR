@@ -95,7 +95,7 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
         liveActorFactory.actorBodyManager = actorBodyManager;
     }
 
-    public GameObject CreateObject(Vector3 position, String nameObject)
+    public GameObject CreateObject(Vector3 position, Quaternion rotation, String nameObject)
     {
 
         if(!m_createNameMap)
@@ -108,6 +108,7 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
 
         newObject.transform.parent = spawnLocations.transform;
         newObject.transform.position = position;
+        newObject.transform.rotation = rotation;
 
         return newObject;
         //Debug.Log("GameObject Name = " + name + " position={" + newObject.transform.position.x + ", " + newObject.transform.position.y + ", " + newObject.transform.position.z + "}\n");
