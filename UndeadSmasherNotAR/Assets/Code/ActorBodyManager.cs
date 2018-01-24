@@ -11,10 +11,11 @@ public class ActorBodyManager : MonoBehaviour {
 	void Start () {
         for (int i = 0; i < models.Length; i++)
         {
+            //Debug.Log(models[i].name);
             if (!modelDictionary.ContainsKey(models[i].name))
             {
                 modelDictionary.Add(models[i].name, models[i]);
-                Debug.Log(models[i].name);
+                //Debug.Log(models[i].name);
             }
         }
     }

@@ -59,11 +59,18 @@ namespace Assets.Code.LevelManagment
                     weaponStorage[weapons[i].name].objectFactory = objectFactory;
                 }
             }
+            player.GetComponent<LiveActor>().weapon = weaponStorage[weapons[0].name];
         }
 
         public void ChangeWeapon(string weaponName)
         {
-            player.GetComponent<LiveActor>().weapon = weaponStorage[weaponName];
+            LiveActor liveActor = player.GetComponent<LiveActor>();
+            liveActor.weapon = weaponStorage[weaponName];
+            weaponStorage[weaponName].owner = player;
+            weaponStorage[weaponName].objectFactory = objectFactory;
+
+            Debug.Log(liveActor.weapon.owner != null);
+
         }
 
         public void Shoot()

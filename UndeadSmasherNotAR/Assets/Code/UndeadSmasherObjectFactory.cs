@@ -38,22 +38,29 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
 
     public void CreateNameMap()
     {
-        for(int i = 0; i < objectList.Length; i++)
+        if(!m_createNameMap)
         {
-            if (!objectMap.ContainsKey(objectList[i].name))
-            {
-                objectMap.Add(objectList[i].name, objectList[i]);
-            }
-        }
+            m_createNameMap = true;
 
-        SetFactoryOptions();
+            for (int i = 0; i < objectList.Length; i++)
+            {
+                if (!objectMap.ContainsKey(objectList[i].name))
+                {
+                    objectMap.Add(objectList[i].name, objectList[i]);
+                }
+            }
+
+            SetFactoryOptions();
+        }
+       
     }
 
+    #region SetFactoryOptions
     private void SetFactoryOptions()
     {
         SetBehaviorFactory();// Важен порядок функции, эта первая
-        SetWeaponFactory();
         SetBulletFactory();
+        SetWeaponFactory();
         SetInanimateActorFactory();
         SetLiveActorFactory();
     }
@@ -95,14 +102,11 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
         liveActorFactory.actorBodyManager = actorBodyManager;
     }
 
+    #endregion
+
     public GameObject CreateObject(Vector3 position, Quaternion rotation, String nameObject)
     {
-
-        if(!m_createNameMap)
-        {
-            m_createNameMap = false;
-            CreateNameMap();
-        }
+        CreateNameMap();
 
         GameObject newObject = CreateUnallocatedObject(nameObject);
 
@@ -155,11 +159,8 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
 
     public void CreateBlock(Vector3 position, String nameBlock)
     {
-        if (!m_createNameMap)
-        {
-            m_createNameMap = false;
-            CreateNameMap();
-        }
+        CreateNameMap();
+      
 
         GameObject newBlock = CreateUnallocatedObject(nameBlock);
 

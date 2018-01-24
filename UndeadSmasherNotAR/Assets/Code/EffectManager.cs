@@ -55,17 +55,20 @@ namespace Assets.Code
             Bullet bullet = first.GetComponent<Bullet>();
             InanimateActor inanimateActor = second.GetComponent<InanimateActor>();
 
-            Debug.Log(first.name);
-            Debug.Log(bullet != null);
-            Debug.Log(second.name);
-            Debug.Log(inanimateActor != null);
+            //Debug.Log(first.name);
+            //Debug.Log(bullet != null);
+            //Debug.Log(second.name);
+            //Debug.Log(inanimateActor != null);
 
-
-            if (AggressiveBehavior.CanDestroyBlock(inanimateActor.fraction, bullet.fraction))
+            if((inanimateActor != null) && (bullet != null))
             {
-                inanimateActor.health.value -= bullet.bulletOptions.portionDamage.damage;
+                if (AggressiveBehavior.CanDestroyBlock(inanimateActor.fraction, bullet.fraction))
+                {
+                    inanimateActor.health.value -= bullet.bulletOptions.portionDamage.damage;
+                }
+                Destroy(first);
             }
-            Destroy(first);
+            
             // Debug.Log("handleBulletAndInanimate");
             //throw new NotImplementedException();
         }

@@ -48,6 +48,12 @@ namespace Assets.Code.Actors
                     //Debug.Log("bulletCounter.value = " + bulletCounter.value);
                     //Debug.Log("owner =" + (owner != null));
                     //Debug.Log("bulletOptions =" + (bulletOptions != null));
+                    if ((owner == null) || (objectFactory == null))
+                    {
+                        Debug.Log("objectFactory != null ==> " + (objectFactory != null));
+                        Debug.Log("owner != null ==> " + (owner != null));
+                        Debug.Log("bulletOptions != null ==> " + (bulletOptions != null));
+                    }
                     return objectFactory.CreateObject(owner.transform.position, rotation, bulletOptions.bulletName);
                 }
             }
