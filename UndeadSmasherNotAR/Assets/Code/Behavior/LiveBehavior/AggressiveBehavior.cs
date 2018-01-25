@@ -18,13 +18,15 @@ namespace Assets.Code.Behavior.BulletBehavior
         public override void Execute(float deltaTime, GameObject actor)
         {
             GameObject foundTarget = GetTarget(actor);
+            LiveActor liveActor = actor.GetComponent<LiveActor>();
             if (foundTarget != null)
             {
-                actor.GetComponent<LiveActor>().Attack(foundTarget, deltaTime);
+                liveActor.Attack(foundTarget, deltaTime);
             }
-            //throw new NotImplementedException("AggressiveBehavior ActorManager");
-
-            //Debug.Log("AggressiveBehavior Execute");
+            else
+            {
+                liveActor.Idle();
+            }
         }
 
         private GameObject GetTarget(GameObject actor)

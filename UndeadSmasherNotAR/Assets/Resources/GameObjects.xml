@@ -21,10 +21,20 @@
 				bulletFeatures__behavior="DirectFlyingBehavior"
 			/>
 		</weapon>
-		<weapon name="SkeletonArcherWeapon" cooldown="1" >
+		<weapon name="SkeletonArcherWeapon" cooldown="3" >
 			<bulletCounter bulletCounter__count="1" bulletCounter__isCountless="true" />
 			<bulletFeatures 
 				bulletFeatures__name="Arrow"
+				bulletFeatures__damage="1" 
+				bulletFeatures__lifeTime="1.5" 
+				bulletFeatures__velocity="10.0" 
+				bulletFeatures__behavior="DirectFlyingBehavior"
+			/>
+		</weapon>
+		<weapon name="MagicGeneratorWeapon" cooldown="1" >
+			<bulletCounter bulletCounter__count="1" bulletCounter__isCountless="true" />
+			<bulletFeatures 
+				bulletFeatures__name="MagicBullet"
 				bulletFeatures__damage="1" 
 				bulletFeatures__lifeTime="1.5" 
 				bulletFeatures__velocity="10.0" 
@@ -39,35 +49,40 @@
 				sizeX="1" sizeY="1" sizeZ="1"
 			/>
 		</bullet>
-		<bullet name="Cobble" model="Cobble">
+		<bullet name="Cobble" model="HQBigRock">
+			<colliderFeatures centerX="0" centerY="0" centerZ="0"
+				sizeX="0.5" sizeY="0.5" sizeZ="0.5"
+			/>
+		</bullet>
+		<bullet name="Bomb" model="BombBall">
 			<colliderFeatures centerX="0" centerY="0" centerZ="0"
 				sizeX="1" sizeY="1" sizeZ="1"
 			/>
 		</bullet>
-		<bullet name="Bomb" model="Bomb">
+		<bullet name="MagicBullet" model="AtomBall">
 			<colliderFeatures centerX="0" centerY="0" centerZ="0"
-				sizeX="1" sizeY="1" sizeZ="1"
+				sizeX="0.5" sizeY="0.5" sizeZ="0.5"
 			/>
 		</bullet>
 	</bullets>
 	
 	<liveActors>
-		<liveActor name="MagicEye" health="10" model="MagicEye" 
+		<liveActor name="MagicEye" health="10" model="Skeleton_archer" 
 			fraction="Player" weapon="PlayerCobbleWeapon" behavior="ControlledBehavior">
 			<colliderFeatures centerX="0" centerY="1.264442" centerZ="0"
 				sizeX="1" sizeY="2.738399" sizeZ="1"
 			/>
 		</liveActor>
 		<liveActor name="MagicGenerator" health="2" model="MagicGenerator" 
-			fraction="Undead" weapon="SkeletonArcherWeapon" behavior="AggressiveBehavior">
+			fraction="Undead" weapon="MagicGeneratorWeapon" behavior="AggressiveBehavior">
 			<colliderFeatures centerX="0.01863956" centerY="1.173308" centerZ="-0.04556704"
 				sizeX="2.06254" sizeY="2.091134" sizeZ="2.002477"
 			/>
 		</liveActor>
-		<liveActor name="SkeletonArcher" health="1" model="SkeletonArcher" 
+		<liveActor name="SkeletonArcher" health="1" model="Skeleton_archer" 
 			fraction="Undead" weapon="SkeletonArcherWeapon" behavior="AggressiveBehavior">
-			<colliderFeatures centerX="0" centerY="1.264442" centerZ="0"
-				sizeX="1" sizeY="2.738399" sizeZ="1"
+			<colliderFeatures centerX="0" centerY="1.037204" centerZ="0"
+				sizeX="1" sizeY="2.155068" sizeZ="1"
 			/>
 		</liveActor>
 	</liveActors>

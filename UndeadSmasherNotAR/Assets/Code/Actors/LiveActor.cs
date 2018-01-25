@@ -18,10 +18,14 @@ namespace Assets.Code.Actors
         public Weapon weapon;
         public IBehavior behavior;
         public ActorState actorState = ActorState.NotShoot;
+        public Animator animatior;
+
+        public Dictionary<string, int> hashToAnimation = new Dictionary<string, int>();
 
         public LiveActor()
         {
             type = TypeEntity.Live;
+            //animations = GetComponent<Animator>();
         }
 
 
@@ -36,6 +40,14 @@ namespace Assets.Code.Actors
                 if (createdBullet)
                 {
                     SetTargetOption(ref createdBullet, target);
+                }
+                else
+                {
+                    if (animatior)
+                    {
+                        animatior.SetBool("Attack", true);
+                        //animatior.SetTrigger(hashToAnimation["Charging"]);
+                    }
                 }
             }         
         }
@@ -70,6 +82,15 @@ namespace Assets.Code.Actors
             }
         }
         #endregion
+
+        public void Idle()
+        {
+            if (animatior)
+            {
+                animatior.SetBool("Attack", false);
+                //animatior.SetTrigger(hashToAnimation["Idle"]);
+            }
+        }
 
         public void RotateToTarget(Vector3 target)
         {

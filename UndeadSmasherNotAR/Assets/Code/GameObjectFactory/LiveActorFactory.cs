@@ -66,10 +66,19 @@ namespace Assets.Code.GameObjectFactory
             
             SetCollider(otherParameters, newObject);
             CreateModelForActor(newObject, position, otherParameters["model"]);
+            LinkLiveActorAndAnimator(ref newObject, ref liveActor);
 
             return newObject;
         }
 
+        private void LinkLiveActorAndAnimator(ref GameObject gameObject, ref LiveActor liveActor)
+        {
+            Transform actorModel = gameObject.transform.GetChild(0);
+
+            liveActor.animatior = actorModel.GetComponent<Animator>();
+            liveActor.hashToAnimation.Add("Charging", Animator.StringToHash("Charging"));
+            liveActor.hashToAnimation.Add("Idle", Animator.StringToHash("Idle"));
+        }
         //private BulletOptions GetBulletOptions(LiveActor actor)
         //{
         //    BulletOptions bulletOptions = new BulletOptions();
