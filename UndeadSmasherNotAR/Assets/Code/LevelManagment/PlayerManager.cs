@@ -66,8 +66,6 @@ namespace Assets.Code.LevelManagment
         {
             LiveActor liveActor = player.GetComponent<LiveActor>();
             liveActor.weapon = weaponStorage[weaponName];
-            weaponStorage[weaponName].owner = player;
-            weaponStorage[weaponName].objectFactory = objectFactory;
 
             Debug.Log(liveActor.weapon.owner != null);
 
@@ -93,6 +91,21 @@ namespace Assets.Code.LevelManagment
                 }
             }
             return false;
+        }
+
+        public void ClearPlayerData()
+        {
+            ClearPlayerWeaponData();
+            player = null;
+        }
+
+        public void ClearPlayerWeaponData()
+        {
+            for (uint i = 0; i < weapons.Length; ++i)
+            {
+                weapons[i] = null;
+            }
+            weaponStorage.Clear();
         }
     }
 }

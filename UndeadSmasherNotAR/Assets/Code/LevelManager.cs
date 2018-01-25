@@ -121,12 +121,6 @@ namespace Assets.Code
             actorManager.ClearScene();
         }
 
-        public uint GetAward()
-        {
-
-            return 0;
-        }
-
         public void ExitGame()
         {
             Application.Quit();

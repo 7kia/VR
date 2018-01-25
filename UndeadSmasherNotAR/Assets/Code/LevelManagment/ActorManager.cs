@@ -91,8 +91,12 @@ public class ActorManager : MonoBehaviour {
     {
         for (int i = 0; i < WEAPON_NAMES.Count; i++)
         {
-            playerManager.weapons[i] = null;
+            if(playerManager.weapons[i])
+            {
+                Destroy(playerManager.weapons[i]);
+            }
         }
+        playerManager.ClearPlayerWeaponData();
     }
 
     public void CreatePlayerWeapons(PlayerManager.PlayerWeapon[] weaponNames, Vector3 playerPosition)
@@ -161,14 +165,13 @@ public class ActorManager : MonoBehaviour {
     #region ClearScene
     public void ClearScene()
     {
-        
+        playerManager.ClearPlayerData();
         for (int i = 0; i < scene.transform.childCount; i++)
         {
             var child = scene.transform.GetChild(i).gameObject;
             if (child)
             {
                 ClearChilds(child);
-
                 Destroy(child);
             }
         }

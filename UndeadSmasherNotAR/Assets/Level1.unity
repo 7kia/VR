@@ -2097,7 +2097,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1007113473}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.0000076293945, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 463707925}
@@ -2803,9 +2803,9 @@ MonoBehaviour:
   effectManager: {fileID: 463707926}
   objectList:
   - {fileID: 1231073801264148, guid: ef85c9927da836e4fa685466e66f119b, type: 2}
-  - {fileID: 0}
+  - {fileID: 1221232554169432, guid: 82bab0ea5b627644d9904c00012ead53, type: 2}
   - {fileID: 1930888588447882, guid: 83cd7aa0a96ff214291ecd95e25ed4ce, type: 2}
-  - {fileID: 0}
+  - {fileID: 1472300816298860, guid: a2c874d41e4bf064bab8c6353a989d91, type: 2}
   blockList:
   - 
   - 
