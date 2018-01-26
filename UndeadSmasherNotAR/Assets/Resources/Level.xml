@@ -1,69 +1,110 @@
 <?xml version="1.0"?>
 <levelData id="0">
-	<blockMap length="10" height="5" width="10">
+	<blockMap length="10" height="7" width="12">
 		<level> 
-			<row value="ssssssssss"/>
-			<row value="ssssssssss"/>
-			<row value="ssssssssss"/>
-			<row value="ssssssssss"/>
-			<row value="ssssssssss"/>
-			<row value="ssssssssss"/>
-			<row value="ssssssssss"/>
-			<row value="ssssssssss"/>
-			<row value="ssssssssss"/>
-			<row value="ssssssssss"/>
+			<row value="ssssssssssss"/>
+			<row value="ssssssssssss"/>
+			<row value="ssssssssssss"/>
+			<row value="ssssssssssss"/>
+			<row value="ssssssssssss"/>
+			<row value="ssssssssssss"/>
+			<row value="ssssssssssss"/>
+			<row value="ssssssssssss"/>
+			<row value="ssssssssssss"/>
+			<row value="ssssssssssss"/>
+			<row value="ssssssssssss"/>
+			<row value="ssssssssssss"/>
 		</level>
 		<level> 
-			<row value="sggsssssss"/>
-			<row value="s##s##s##s"/>
-			<row value="s##s##s##s"/>
-			<row value="ssssssssss"/>
-			<row value="s##s##s##s"/>
-			<row value="s##s##s##s"/>
-			<row value="ssssssssss"/>
-			<row value="s##s##s##s"/>
-			<row value="s##s##s##s"/>
-			<row value="ssssssssss"/>
+			<row value="ssssggggssss"/>
+			<row value="s##sggggs##s"/>
+			<row value="s##sggggs##s"/>
+			<row value="ssssggggssss"/>
+			<row value="ssss####ssss"/>
+			<row value="ssss####ssss"/>
+			<row value="ssss####ssss"/>
+			<row value="ssss####ssss"/>
+			<row value="ssssssssssss"/>
+			<row value="s##ssssss##s"/>
+			<row value="s##ssssss##s"/>
+			<row value="ssssssssssss"/>
 		</level>
 		<level> 
-			<row value="sggsssssss"/>
-			<row value="spps##spps"/>
-			<row value="spps##spps"/>
-			<row value="ssssssssss"/>
-			<row value="s##s##s##s"/>
-			<row value="s##s##s##s"/>
-			<row value="ssssssssss"/>
-			<row value="spps##spps"/>
-			<row value="spps##spps"/>
-			<row value="ssssssssss"/>
+			<row value="ssssggggssss"/>
+			<row value="s##sggggs##s"/>
+			<row value="s##sggggs##s"/>
+			<row value="ssssggggssss"/>
+			<row value="ssss####ssss"/>
+			<row value="ssss####ssss"/>
+			<row value="ssss####ssss"/>
+			<row value="ssss####ssss"/>
+			<row value="ssssssssssss"/>
+			<row value="s##ssssss##s"/>
+			<row value="s##ssssss##s"/>
+			<row value="ssssssssssss"/>
 		</level>
 		<level> 
-			<row value="##########"/>
-			<row value="##########"/>
-			<row value="##########"/>
-			<row value="###ssss###"/>
-			<row value="###sggs###"/>
-			<row value="###sggs###"/>
-			<row value="###ssss###"/>
-			<row value="##########"/>
-			<row value="##########"/>
-			<row value="##########"/>
+			<row value="ssssggggssss"/>
+			<row value="s##sggggs##s"/>
+			<row value="s##sggggs##s"/>
+			<row value="ssssggggssss"/>
+			<row value="ssss####ssss"/>
+			<row value="ssss####ssss"/>
+			<row value="ssss####ssss"/>
+			<row value="ssss####ssss"/>
+			<row value="ssssssssssss"/>
+			<row value="s##ssssss##s"/>
+			<row value="s##ssssss##s"/>
+			<row value="ssssssssssss"/>
 		</level>
 		<level> 
-			<row value="##########"/>
-			<row value="##########"/>
-			<row value="##########"/>
-			<row value="###ssss###"/>
-			<row value="###s##s###"/>
-			<row value="###s##s###"/>
-			<row value="###ssss###"/>
-			<row value="##########"/>
-			<row value="##########"/>
-			<row value="##########"/>
+			<row value="ssssssssssss"/>
+			<row value="sppsssssspps"/>
+			<row value="sppsssssspps"/>
+			<row value="ssssssssssss"/>
+			<row value="ssss####ssss"/>
+			<row value="ssss####ssss"/>
+			<row value="ssss####ssss"/>
+			<row value="ssss####ssss"/>
+			<row value="ssssssssssss"/>
+			<row value="sppsssssspps"/>
+			<row value="sppsssssspps"/>
+			<row value="ssssssssssss"/>
+		</level>
+		<level> 
+			<row value="ssss####ssss"/>
+			<row value="s##s####s##s"/>
+			<row value="s##s####s##s"/>
+			<row value="ssssssssssss"/>
+			<row value="###sggggs###"/>
+			<row value="###sggggs###"/>
+			<row value="###sggggs###"/>
+			<row value="###sggggs###"/>
+			<row value="ssssssssssss"/>
+			<row value="s##s####s##s"/>
+			<row value="s##s####s##s"/>
+			<row value="ssss####ssss"/>
+		</level>
+		<level> 
+			<row value="############"/>
+			<row value="############"/>
+			<row value="############"/>
+			<row value="###ssssss###"/>
+			<row value="###s####s###"/>
+			<row value="###s####s###"/>
+			<row value="###s####s###"/>
+			<row value="###s####s###"/>
+			<row value="###ssssss###"/>
+			<row value="############"/>
+			<row value="############"/>
+			<row value="############"/>
 		</level>
 	</blockMap>
 	<objects>
-		<object name="MagicGenerator" x="2.23" y="0.055" z="2.23" />
-		<object name="SkeletonArcher" x="3.759" y="1.832" z="3.771" />
+		<object name="MagicGenerator" x="2.843" y="0.204" z="2.717" />
+		<object name="SkeletonArcher" x="4.34" y="2.38" z="4.94" />
+		<object name="SkeletonArcher" x="0.6300001" y="2.38" z="4.94" />
+		<object name="SkeletonArcher" x="0.6300001" y="2.38" z="0.62" />
+		<object name="SkeletonArcher" x="4.82" y="2.38" z="0.62" />
 	</objects>
 </levelData>
