@@ -27,6 +27,11 @@ public class ActorManager : MonoBehaviour {
         WEAPON_NAMES.Add(PlayerManager.PlayerWeapon.CobbleWeapon, "PlayerCobbleWeapon");
         WEAPON_NAMES.Add(PlayerManager.PlayerWeapon.BombWeapon, "PlayerBombWeapon");
     }
+
+    public int GetMagicGeneratorIndex()
+    {
+        return magicGeneratorIndex;
+    }
     // Use this for initialization
     void Start () {
     }

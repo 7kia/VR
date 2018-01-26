@@ -5,6 +5,7 @@ using UnityEngine;
 using System;
 using Assets.Code.PlayerInterface;
 using Assets.Code.LevelManagment;
+using UnityEngine.UI;
 
 namespace Assets.Code
 {
@@ -24,6 +25,8 @@ namespace Assets.Code
             CreateLevel();
         }
 
+        #region Update
+
         // Update is called once per frame
         void Update()
         {
@@ -38,6 +41,7 @@ namespace Assets.Code
                 {
                     case GameStateManager.GameState.Play:
                         gameStateManager.nowPause = false;
+                        CheckDistancePlayerDistance();
                         actorManager.Play();
                         break;
                     case GameStateManager.GameState.Pause:
@@ -67,6 +71,28 @@ namespace Assets.Code
             SetPlayerBulletCounterState(PlayerManager.PlayerWeapon.BombWeapon);
         }
 
+        // Игрок не может атаковать вблизи крепости
+        private void CheckDistancePlayerDistance()
+        {
+
+            Transform magicGenerator = actorManager.scene.transform.GetChild(actorManager.GetMagicGeneratorIndex());
+            Vector3 playerPosition = actorManager.playerManager.player.transform.position;
+            Vector3 magicGeneratorPosition = magicGenerator.position;
+            float distance = Vector3.Distance(playerPosition, magicGeneratorPosition);
+
+            if (distance < 10.0f)
+            {
+                playerWindows.shootButton.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                playerWindows.shootButton.GetComponent<Button>().interactable = true;
+            }
+        }
+
+        #endregion
+
+
         private void SetPlayerBulletCounterState(PlayerManager.PlayerWeapon weapon)
         {
             playerWindows.SetBulletCounterState(
@@ -91,6 +117,7 @@ namespace Assets.Code
                 gameStateManager.nowPause = false;
             }
         }
+
 
         public void CreateLevel()
         {
