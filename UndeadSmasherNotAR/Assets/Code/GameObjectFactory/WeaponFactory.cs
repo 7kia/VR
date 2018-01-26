@@ -29,7 +29,7 @@ namespace Assets.Code.GameObjectFactory
 
             weapon.name = otherParameters["name"];
 
-            weapon.cooldown.time = float.Parse(otherParameters["cooldown"]);
+            weapon.cooldown.time = 0.0f;
             weapon.cooldown.maxTime = float.Parse(otherParameters["cooldown"]);
 
             //Debug.Log("weapon.cooldown.time  =" + weapon.cooldown.time);

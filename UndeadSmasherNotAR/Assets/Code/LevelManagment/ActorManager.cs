@@ -35,7 +35,7 @@ public class ActorManager : MonoBehaviour {
     void Update () {
 		if (checkActors)
         {
-            CheckHealth();
+            CheckActors();
         }
 	}
 
@@ -321,21 +321,76 @@ public class ActorManager : MonoBehaviour {
     #endregion
 
 
-    private void CheckHealth()
+    private void CheckActors()
     {
         Transform nodeWithActors = scene.transform;
         for (int i = 0; i < nodeWithActors.childCount; i++)
         {
             var child = nodeWithActors.GetChild(i);
-            CheckHealthActor(ref child);
+            if(!CheckHealthActor(ref child))
+            {
+                
+            }
+            if (child != null)
+            {
+                CheckLifeTime(ref child);
+            }
         }
     }
 
-    private void CheckHealthActor(ref Transform transform)
+    #region CheckLifeTime
+    private void CheckLifeTime(ref Transform child)
     {
-        LiveActor liveActor = transform.GetComponent<LiveActor>();
-        Bullet bullet = transform.GetComponent<Bullet>();
-        InanimateActor inanimateActor = transform.GetComponent<InanimateActor>();
+        LiveActor liveActor = child.GetComponent<LiveActor>();
+        Bullet bullet = child.GetComponent<Bullet>();
+        InanimateActor inanimateActor = child.GetComponent<InanimateActor>();
+
+
+        bool destroy = false;
+        if (liveActor)
+        {
+            destroy = CheckLiveActorLifeTime(ref liveActor);
+        }
+        else if (bullet)
+        {
+            destroy = CheckBulletLifeTime(ref bullet);
+        }
+        else if (inanimateActor)
+        {
+            destroy = CheckInanimateActorLifeTime(ref inanimateActor);
+        }
+
+        if (destroy)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    private bool CheckLiveActorLifeTime(ref LiveActor liveActor)
+    {
+        return false;
+    }
+
+    private bool CheckBulletLifeTime(ref Bullet bullet)
+    {
+        return bullet.lifeTimer.NowTimeMoreMax();
+    }
+
+    private bool CheckInanimateActorLifeTime(ref InanimateActor inanimateActor)
+    {
+        return false;
+    }
+
+
+
+    #endregion
+
+    #region CheckHealth
+    private bool CheckHealthActor(ref Transform child)
+    {
+        LiveActor liveActor = child.GetComponent<LiveActor>();
+        Bullet bullet = child.GetComponent<Bullet>();
+        InanimateActor inanimateActor = child.GetComponent<InanimateActor>();
 
         bool destroy = false;
         if (liveActor)
@@ -351,10 +406,13 @@ public class ActorManager : MonoBehaviour {
             destroy = CheckHealthInanimateActor(ref inanimateActor);
         }
 
-        if (destroy && (transform.name != MAGIC_GENERATOR_NAME))
+        destroy = (destroy && (child.name != MAGIC_GENERATOR_NAME));
+        if (destroy)
         {
-            Destroy(transform.gameObject);
+            Destroy(child.gameObject);
         }
+
+        return destroy;
     }
 
     private static bool CheckHealthInanimateActor(ref InanimateActor inanimateActor)
@@ -385,4 +443,6 @@ public class ActorManager : MonoBehaviour {
         //}
         return false;
     }
+    #endregion
+   
 }

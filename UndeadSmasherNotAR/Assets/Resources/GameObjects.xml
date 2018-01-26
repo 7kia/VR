@@ -26,7 +26,7 @@
 			<bulletFeatures 
 				bulletFeatures__name="Arrow"
 				bulletFeatures__damage="1" 
-				bulletFeatures__lifeTime="1.5" 
+				bulletFeatures__lifeTime="5.5" 
 				bulletFeatures__velocity="10.0" 
 				bulletFeatures__behavior="DirectFlyingBehavior"
 			/>
@@ -36,7 +36,7 @@
 			<bulletFeatures 
 				bulletFeatures__name="MagicBullet"
 				bulletFeatures__damage="1" 
-				bulletFeatures__lifeTime="1.5" 
+				bulletFeatures__lifeTime="5.5" 
 				bulletFeatures__velocity="10.0" 
 				bulletFeatures__behavior="DirectFlyingBehavior"
 			/>

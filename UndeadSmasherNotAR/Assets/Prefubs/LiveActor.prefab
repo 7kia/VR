@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33462556960899422}
   - component: {fileID: 65693717430753772}
   - component: {fileID: 23720261229370762}
-  - component: {fileID: 54404962538788926}
   - component: {fileID: 114581336316567230}
   m_Layer: 0
   m_Name: LiveActor
@@ -85,28 +84,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1472300816298860}
   m_Mesh: {fileID: 0}
---- !u!54 &54404962538788926
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1472300816298860}
-  serializedVersion: 2
-  m_Mass: 5
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &65693717430753772
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1472300816298860}
-  m_Material: {fileID: 13400000, guid: e08823e9c1565bc4895cb9f051120fa4, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
@@ -124,6 +108,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectManager: {fileID: 0}
-  physicBody: {fileID: 54404962538788926}
+  fraction: 2
+  type: 0
+  physicBody: {fileID: 0}
+  isActive: 0
   weapon: {fileID: 0}
-  behavior: {fileID: 0}
+  actorState: 1
+  animatior: {fileID: 0}

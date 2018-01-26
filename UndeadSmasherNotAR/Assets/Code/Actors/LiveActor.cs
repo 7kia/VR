@@ -39,7 +39,7 @@ namespace Assets.Code.Actors
                 GameObject createdBullet = weapon.Shoot(deltaTime, rotation);
                 if (createdBullet)
                 {
-                    SetTargetOption(ref createdBullet, target);
+                    SetBulletOption(ref createdBullet, target);
                 }
                 else
                 {
@@ -57,7 +57,7 @@ namespace Assets.Code.Actors
             Attack(target.transform.position, target.transform.rotation, deltaTime);
         }
 
-        private void SetTargetOption(ref GameObject createdBullet, Vector3 target)
+        private void SetBulletOption(ref GameObject createdBullet, Vector3 target)
         {
             var shift = (target - this.transform.position).normalized * 1.5f;
             createdBullet.transform.position += shift;
@@ -65,6 +65,12 @@ namespace Assets.Code.Actors
             Bullet bullet = createdBullet.GetComponent<Bullet>();
             bullet.fraction = fraction;
             SetTargetForBullet(bullet, target);
+
+            bullet.lifeTimer.StopTimer();
+            bullet.lifeTimer.time = 0.0f;
+            bullet.lifeTimer.maxTime = weapon.bulletOptions.lifeTime;
+            bullet.lifeTimer.PlayTimer();
+
         }
 
         private void SetTargetForBullet(Bullet bullet, Vector3 target)
