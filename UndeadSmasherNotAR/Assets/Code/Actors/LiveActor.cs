@@ -46,7 +46,7 @@ namespace Assets.Code.Actors
                     if (animatior)
                     {
                         animatior.SetBool("Attack", true);
-                        //animatior.SetTrigger(hashToAnimation["Charging"]);
+                        animatior.SetTrigger(hashToAnimation["Charging"]);
                     }
                 }
             }         

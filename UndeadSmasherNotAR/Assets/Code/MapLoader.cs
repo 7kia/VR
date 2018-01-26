@@ -23,6 +23,7 @@ namespace Assets.Code
         {
             signToNameBlock.Add("p", "PlankBlock");
             signToNameBlock.Add("s", "StoneBrickBlock");
+            signToNameBlock.Add("g", "IronGratingBlock");
         }
 
         public void LoadMap(string mapPath)
