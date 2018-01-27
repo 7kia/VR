@@ -2,7 +2,7 @@
 <configData>
 	<weapons>
 		<weapon name="PlayerCobbleWeapon" cooldown="0.1" >
-			<bulletCounter bulletCounter__count="5" bulletCounter__isCountless="false" />
+			<bulletCounter bulletCounter__count="8" bulletCounter__isCountless="false" />
 			<bulletFeatures 
 				bulletFeatures__name="Cobble"
 				bulletFeatures__damage="1" 
@@ -12,7 +12,7 @@
 			/>
 		</weapon>
 		<weapon name="PlayerBombWeapon" cooldown="0.1" >
-			<bulletCounter bulletCounter__count="3" bulletCounter__isCountless="false" />
+			<bulletCounter bulletCounter__count="5" bulletCounter__isCountless="false" />
 			<bulletFeatures 
 				bulletFeatures__name="Bomb"
 				bulletFeatures__damage="20" 
@@ -31,7 +31,7 @@
 				bulletFeatures__behavior="DirectFlyingBehavior"
 			/>
 		</weapon>
-		<weapon name="MagicGeneratorWeapon" cooldown="1" >
+		<weapon name="MagicGeneratorWeapon" cooldown="3" >
 			<bulletCounter bulletCounter__count="1" bulletCounter__isCountless="true" />
 			<bulletFeatures 
 				bulletFeatures__name="MagicBullet"

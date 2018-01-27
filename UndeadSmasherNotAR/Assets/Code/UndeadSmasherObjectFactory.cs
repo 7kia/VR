@@ -40,6 +40,7 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
     {
         if(!m_createNameMap)
         {
+            actorBodyManager.LoadModels();
             m_createNameMap = true;
 
             for (int i = 0; i < objectList.Length; i++)
