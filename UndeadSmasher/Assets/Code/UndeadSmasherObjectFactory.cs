@@ -38,22 +38,30 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
 
     public void CreateNameMap()
     {
-        for(int i = 0; i < objectList.Length; i++)
+        if(!m_createNameMap)
         {
-            if (!objectMap.ContainsKey(objectList[i].name))
-            {
-                objectMap.Add(objectList[i].name, objectList[i]);
-            }
-        }
+            actorBodyManager.LoadModels();
+            m_createNameMap = true;
 
-        SetFactoryOptions();
+            for (int i = 0; i < objectList.Length; i++)
+            {
+                if (!objectMap.ContainsKey(objectList[i].name))
+                {
+                    objectMap.Add(objectList[i].name, objectList[i]);
+                }
+            }
+
+            SetFactoryOptions();
+        }
+       
     }
 
+    #region SetFactoryOptions
     private void SetFactoryOptions()
     {
         SetBehaviorFactory();// Важен порядок функции, эта первая
-        SetWeaponFactory();
         SetBulletFactory();
+        SetWeaponFactory();
         SetInanimateActorFactory();
         SetLiveActorFactory();
     }
@@ -95,19 +103,17 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
         liveActorFactory.actorBodyManager = actorBodyManager;
     }
 
-    public GameObject CreateObject(Vector3 position, String nameObject)
-    {
+    #endregion
 
-        if(!m_createNameMap)
-        {
-            m_createNameMap = false;
-            CreateNameMap();
-        }
+    public GameObject CreateObject(Vector3 position, Quaternion rotation, String nameObject)
+    {
+        CreateNameMap();
 
         GameObject newObject = CreateUnallocatedObject(nameObject);
 
         newObject.transform.parent = spawnLocations.transform;
         newObject.transform.position = position;
+        newObject.transform.rotation = rotation;
 
         return newObject;
         //Debug.Log("GameObject Name = " + name + " position={" + newObject.transform.position.x + ", " + newObject.transform.position.y + ", " + newObject.transform.position.z + "}\n");
@@ -154,11 +160,8 @@ public class UndeadSmasherObjectFactory : MonoBehaviour {
 
     public void CreateBlock(Vector3 position, String nameBlock)
     {
-        if (!m_createNameMap)
-        {
-            m_createNameMap = false;
-            CreateNameMap();
-        }
+        CreateNameMap();
+      
 
         GameObject newBlock = CreateUnallocatedObject(nameBlock);
 

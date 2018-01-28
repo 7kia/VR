@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<configData>
+	<weapons>
+		<weapon name="PlayerCobbleWeapon" cooldown="0.1" >
+			<bulletCounter bulletCounter__count="8" bulletCounter__isCountless="false" />
+			<bulletFeatures 
+				bulletFeatures__name="Cobble"
+				bulletFeatures__damage="1" 
+				bulletFeatures__lifeTime="5.5" 
+				bulletFeatures__velocity="5.0" 
+				bulletFeatures__behavior="DirectFlyingBehavior"
+			/>
+		</weapon>
+		<weapon name="PlayerBombWeapon" cooldown="0.1" >
+			<bulletCounter bulletCounter__count="5" bulletCounter__isCountless="false" />
+			<bulletFeatures 
+				bulletFeatures__name="Bomb"
+				bulletFeatures__damage="20" 
+				bulletFeatures__lifeTime="5.5" 
+				bulletFeatures__velocity="5.0" 
+				bulletFeatures__behavior="DirectFlyingBehavior"
+			/>
+		</weapon>
+		<weapon name="SkeletonArcherWeapon" cooldown="3" >
+			<bulletCounter bulletCounter__count="1" bulletCounter__isCountless="true" />
+			<bulletFeatures 
+				bulletFeatures__name="Arrow"
+				bulletFeatures__damage="1" 
+				bulletFeatures__lifeTime="5.5" 
+				bulletFeatures__velocity="10.0" 
+				bulletFeatures__behavior="DirectFlyingBehavior"
+			/>
+		</weapon>
+		<weapon name="MagicGeneratorWeapon" cooldown="3" >
+			<bulletCounter bulletCounter__count="1" bulletCounter__isCountless="true" />
+			<bulletFeatures 
+				bulletFeatures__name="MagicBullet"
+				bulletFeatures__damage="1" 
+				bulletFeatures__lifeTime="5.5" 
+				bulletFeatures__velocity="10.0" 
+				bulletFeatures__behavior="DirectFlyingBehavior"
+			/>
+		</weapon>
+	</weapons>
+	
+	<bullets>
+		<bullet name="Arrow" model="Arrow">
+			<colliderFeatures centerX="0" centerY="0" centerZ="-0.9843564"
+				sizeX="1" sizeY="1" sizeZ="2.968713"
+			/>
+		</bullet>
+		<bullet name="Cobble" model="HQBigRock">
+			<colliderFeatures centerX="0" centerY="0" centerZ="0"
+				sizeX="0.5" sizeY="0.5" sizeZ="0.5"
+			/>
+		</bullet>
+		<bullet name="Bomb" model="BombBall">
+			<colliderFeatures centerX="0" centerY="0" centerZ="0"
+				sizeX="1" sizeY="1" sizeZ="1"
+			/>
+		</bullet>
+		<bullet name="MagicBullet" model="MagicBall">
+			<colliderFeatures centerX="0" centerY="0" centerZ="0"
+				sizeX="0.5" sizeY="0.5" sizeZ="0.5"
+			/>
+		</bullet>
+	</bullets>
+	
+	<liveActors>
+		<liveActor name="MagicEye" health="50" model="MagicEye" 
+			fraction="Player" weapon="PlayerCobbleWeapon" behavior="ControlledBehavior">
+			<colliderFeatures centerX="0.005386949" centerY="-0.01065731" centerZ="-0.1959169"
+				sizeX="3.057265" sizeY="3.221036" sizeZ="2.951624"
+			/>
+		</liveActor>
+		<liveActor name="MagicGenerator" health="2" model="MagicGenerator" 
+			fraction="Undead" weapon="MagicGeneratorWeapon" behavior="AggressiveBehavior">
+			<colliderFeatures centerX="0.01863956" centerY="1.173308" centerZ="-0.04556704"
+				sizeX="2.06254" sizeY="2.091134" sizeZ="2.002477"
+			/>
+		</liveActor>
+		<liveActor name="SkeletonArcher" health="1" model="Skeleton_archer" 
+			fraction="Undead" weapon="SkeletonArcherWeapon" behavior="AggressiveBehavior">
+			<colliderFeatures centerX="0.03269845" centerY="1.95561" centerZ="-0.05462891"
+				sizeX="1.613028" sizeY="3.99188" sizeZ="1.518665"
+			/>
+		</liveActor>
+	</liveActors>
+	
+	<inanimateActors>
+		<inanimateActor name="PlankBlock" model="PlankBlock" health="1" fraction="Neutral">
+			<colliderFeatures centerX="0" centerY="0" centerZ="0"
+					sizeX="1" sizeY="1" sizeZ="1"
+				/>
+		</inanimateActor>
+		<inanimateActor name="StoneBrickBlock" model="StoneBrickBlock" health="20" fraction="Neutral">
+			<colliderFeatures centerX="0" centerY="0" centerZ="0"
+					sizeX="1" sizeY="1" sizeZ="1"
+				/>
+		</inanimateActor>
+		<inanimateActor name="IronGratingBlock" model="IronGratingBlock" health="20" fraction="Neutral">
+			<colliderFeatures centerX="0" centerY="0" centerZ="0"
+					sizeX="1" sizeY="1" sizeZ="1"
+				/>
+		</inanimateActor>
+	</inanimateActors>
+</configData>
+

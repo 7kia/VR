@@ -23,6 +23,7 @@ namespace Assets.Code
         {
             signToNameBlock.Add("p", "PlankBlock");
             signToNameBlock.Add("s", "StoneBrickBlock");
+            signToNameBlock.Add("g", "IronGratingBlock");
         }
 
         public void LoadMap(string mapPath)
@@ -32,12 +33,13 @@ namespace Assets.Code
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(textAsset.text);
 
-            LoadBlockMap(xmlDoc);
-            LoadObjectMap(xmlDoc);  
+            LoadBlockMap(xmlDoc); 
+            LoadObjectMap(xmlDoc);
+ 
         }
 
-        #region LoadObjectMap
-        private void LoadObjectMap(XmlDocument xmlDoc)
+        #region LoadBlockMap
+        private void LoadBlockMap(XmlDocument xmlDoc)
         {
             XmlNode blockMap = xmlDoc.SelectSingleNode("levelData").SelectSingleNode("blockMap");
             var levelList = blockMap.SelectNodes("level");
@@ -86,8 +88,8 @@ namespace Assets.Code
         }
         #endregion
 
-        #region LoadBlockMap
-        private void LoadBlockMap(XmlDocument xmlDoc)
+        #region LoadObjectMap
+        private void LoadObjectMap(XmlDocument xmlDoc)
         {
             XmlNode objectMap = xmlDoc.SelectSingleNode("levelData");
             var objectList = objectMap.SelectSingleNode("objects").SelectNodes("object");
@@ -108,9 +110,7 @@ namespace Assets.Code
                 float.Parse(GetAtribute(ref xmlNode, "z"))
             );
 
-            objectFactory.CreateObject(position, name);
-
-           
+            objectFactory.CreateObject(position, new Quaternion(), name);
         }
         #endregion
 
