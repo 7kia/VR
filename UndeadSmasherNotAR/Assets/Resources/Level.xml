@@ -103,8 +103,6 @@
 	<objects>
 		<object name="MagicGenerator" x="2.843" y="0.204" z="2.717" />
 		<object name="SkeletonArcher" x="4.34" y="2.38" z="4.94" />
-		<object name="SkeletonArcher" x="0.6300001" y="2.38" z="4.94" />
 		<object name="SkeletonArcher" x="0.6300001" y="2.38" z="0.62" />
-		<object name="SkeletonArcher" x="4.82" y="2.38" z="0.62" />
 	</objects>
 </levelData>
