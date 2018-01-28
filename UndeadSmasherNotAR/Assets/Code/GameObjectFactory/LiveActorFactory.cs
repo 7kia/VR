@@ -37,8 +37,8 @@ namespace Assets.Code.GameObjectFactory
 
             liveActor.name = otherParameters["name"];
             // WARNING : Порядок присваивания важен, смотри реализацию value
-            liveActor.health.maxValue = uint.Parse(otherParameters["health"]);
-            liveActor.health.value = uint.Parse(otherParameters["health"]);
+            liveActor.health.maxValue = int.Parse(otherParameters["health"]);
+            liveActor.health.value = int.Parse(otherParameters["health"]);
             liveActor.fraction = FractionFactory.Create(otherParameters["fraction"]);
 
 

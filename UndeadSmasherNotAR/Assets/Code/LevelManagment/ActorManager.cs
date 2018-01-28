@@ -13,7 +13,7 @@ public class ActorManager : MonoBehaviour {
     public GameObject scene = null;
     public UndeadSmasherObjectFactory objectFactory = null;
 
-    private int magicGeneratorIndex = 0;
+    public GameObject magicGenerator;
 
     public bool checkActors = false;
     public static string MAGIC_GENERATOR_NAME = "MagicGenerator";
@@ -28,10 +28,6 @@ public class ActorManager : MonoBehaviour {
         WEAPON_NAMES.Add(PlayerManager.PlayerWeapon.BombWeapon, "PlayerBombWeapon");
     }
 
-    public int GetMagicGeneratorIndex()
-    {
-        return magicGeneratorIndex;
-    }
     // Use this for initialization
     void Start () {
     }
@@ -53,7 +49,7 @@ public class ActorManager : MonoBehaviour {
             {
                 if(child.name == MAGIC_GENERATOR_NAME)
                 {
-                    magicGeneratorIndex = i;
+                    magicGenerator = child;
                     return;
                 }
             }
@@ -180,7 +176,7 @@ public class ActorManager : MonoBehaviour {
                 Destroy(child);
             }
         }
-        magicGeneratorIndex = -1;
+        magicGenerator = null;
     }
 
     private void ClearChilds(GameObject node)
@@ -214,7 +210,10 @@ public class ActorManager : MonoBehaviour {
     public bool MagicGeneratorIsLive()
     {
         //Debug.Log("magicGenerator health =" + scene.transform.GetChild(magicGeneratorIndex).GetComponent<LiveActor>().health.value);
-        return scene.transform.GetChild(magicGeneratorIndex).GetComponent<LiveActor>().health.value > 0;
+        
+
+        //scene.transform.GetChild(magicGeneratorIndex)
+        return magicGenerator.GetComponent<LiveActor>().health.value > 0;
     }
 
     public bool ContentUndead()
@@ -252,7 +251,7 @@ public class ActorManager : MonoBehaviour {
         return false;
     }
 
-    public uint GetPlayerHealth()
+    public int GetPlayerHealth()
     {
         if (playerManager.player)
         {
@@ -261,7 +260,7 @@ public class ActorManager : MonoBehaviour {
         throw new Exception("Player not create");
     }
 
-    public uint GetPlayerMaxHealth()
+    public int GetPlayerMaxHealth()
     {
         if (playerManager.player)
         {
@@ -422,7 +421,7 @@ public class ActorManager : MonoBehaviour {
 
     private static bool CheckHealthInanimateActor(ref InanimateActor inanimateActor)
     {
-        return inanimateActor.health.value == 0;
+        return inanimateActor.health.value <= 0;
     }
 
     private static bool CheckHealthBullet(ref Bullet bullet)
@@ -437,7 +436,7 @@ public class ActorManager : MonoBehaviour {
 
         if (fraction != FractionValue.Fraction.Player)
         {
-            if (liveActor.health.value == 0)
+            if (liveActor.health.value <= 0)
             {
                 return true;
             }

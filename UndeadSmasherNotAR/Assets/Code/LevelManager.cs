@@ -75,12 +75,12 @@ namespace Assets.Code
         private void CheckDistancePlayerDistance()
         {
 
-            Transform magicGenerator = actorManager.scene.transform.GetChild(actorManager.GetMagicGeneratorIndex());
+            Transform magicGenerator = actorManager.magicGenerator.transform;//scene.transform.GetChild(actorManager.GetMagicGeneratorIndex());
             Vector3 playerPosition = actorManager.playerManager.player.transform.position;
             Vector3 magicGeneratorPosition = magicGenerator.position;
             float distance = Vector3.Distance(playerPosition, magicGeneratorPosition);
 
-            if (distance < 10.0f)
+            if (distance < 5.0f)
             {
                 playerWindows.shootButton.GetComponent<Button>().interactable = false;
             }
@@ -127,9 +127,9 @@ namespace Assets.Code
             ClearLevel();
             gameObjectConfigManager.LoadConfig("GameObjects");
             mapLoader.LoadMap("Level");
-            actorManager.FindMagicGenerator();
             actorManager.GeneratePlayer();
             actorManager.playerManager.SetWeaponStorage();
+            actorManager.FindMagicGenerator();
             actorManager.checkActors = true;
 
             gameStateManager.nowPause = false;

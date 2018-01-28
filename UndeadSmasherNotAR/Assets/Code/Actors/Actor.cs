@@ -15,7 +15,7 @@ namespace Assets.Code.Actors
         public TypeEntity type;
         public Rigidbody physicBody;
 
-        public DynamicСharacteristic<uint> health = new DynamicСharacteristic<uint>();
+        public DynamicСharacteristic<int> health = new DynamicСharacteristic<int>();
         public bool isActive;
 
         // Use this for initialization

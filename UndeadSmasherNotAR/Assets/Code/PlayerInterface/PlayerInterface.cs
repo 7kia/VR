@@ -53,7 +53,7 @@ namespace Assets.Code.PlayerInterface
         }
         //public GameObject pausePanel;
 
-        public void SetHealthBarState(uint value, uint maxValue)
+        public void SetHealthBarState(int value, int maxValue)
         {
             playerHealthBar.GetComponent<Text>().text = value.ToString() + '/' + maxValue.ToString();
         }

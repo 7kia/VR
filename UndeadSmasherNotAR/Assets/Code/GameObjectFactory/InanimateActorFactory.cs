@@ -30,8 +30,8 @@ namespace Assets.Code.GameObjectFactory
 
             inanimateActor.name = otherParameters["name"];
             // WARNING : Порядок присваивания важен, смотри реализацию value
-            inanimateActor.health.maxValue = uint.Parse(otherParameters["health"]);
-            inanimateActor.health.value = uint.Parse(otherParameters["health"]);
+            inanimateActor.health.maxValue = int.Parse(otherParameters["health"]);
+            inanimateActor.health.value = int.Parse(otherParameters["health"]);
             inanimateActor.fraction = FractionFactory.Create(otherParameters["fraction"]);
 
             SetCollider(otherParameters, newObject);

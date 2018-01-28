@@ -64,7 +64,7 @@ namespace Assets.Code
             {
                 if (AggressiveBehavior.CanDestroyBlock(inanimateActor.fraction, bullet.fraction))
                 {
-                    inanimateActor.health.value -= bullet.bulletOptions.portionDamage.damage;
+                    inanimateActor.health.value -= (int)bullet.bulletOptions.portionDamage.damage;
                 }
                 Destroy(first);
             }
@@ -83,7 +83,7 @@ namespace Assets.Code
 
             if (AggressiveBehavior.IsWarringFractions(bullet.fraction, liveActor.fraction))
             {
-                liveActor.health.value -= bullet.bulletOptions.portionDamage.damage;
+                liveActor.health.value -= (int)bullet.bulletOptions.portionDamage.damage;
             }
             Destroy(first);
 
