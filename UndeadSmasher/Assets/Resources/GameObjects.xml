@@ -73,7 +73,7 @@
 				sizeX="3.057265" sizeY="3.221036" sizeZ="2.951624"
 			/>
 		</liveActor>
-		<liveActor name="MagicGenerator" health="2" model="MagicGenerator" 
+		<liveActor name="MagicGenerator" health="1" model="MagicGenerator" 
 			fraction="Undead" weapon="MagicGeneratorWeapon" behavior="AggressiveBehavior">
 			<colliderFeatures centerX="0.01863956" centerY="1.173308" centerZ="-0.04556704"
 				sizeX="2.06254" sizeY="2.091134" sizeZ="2.002477"
