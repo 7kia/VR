@@ -40,24 +40,24 @@ namespace Assets.Code
                 switch (gameState)
                 {
                     case GameStateManager.GameState.Play:
-                        gameStateManager.nowPause = false;
                         CheckDistancePlayerDistance();
                         actorManager.Play();
                         break;
                     case GameStateManager.GameState.Pause:
-                        gameStateManager.nowPause = true;
                         actorManager.Pause();
                         break;
                     case GameStateManager.GameState.Defeat:
                         actorManager.Pause();
                         playerWindows.defeatPanel.SetActive(true);
                         playerWindows.SetInteractiveButtons(false);
+                        gameState = GameStateManager.GameState.NotLoad;
                         break;
                     case GameStateManager.GameState.Victory:
                         actorManager.Pause();
                         playerWindows.victoryPanel.SetActive(true);
                         playerWindows.SetInteractiveButtons(false);
                         playerWindows.SetAwardValue(actorManager.GetAward());
+                        gameState = GameStateManager.GameState.NotLoad;
                         break;
                 }
             }
@@ -75,9 +75,8 @@ namespace Assets.Code
         private void CheckDistancePlayerDistance()
         {
 
-            Transform magicGenerator = actorManager.magicGenerator.transform;//scene.transform.GetChild(actorManager.GetMagicGeneratorIndex());
             Vector3 playerPosition = actorManager.playerManager.player.transform.position;
-            Vector3 magicGeneratorPosition = magicGenerator.position;
+            Vector3 magicGeneratorPosition = actorManager.magicGenerator.transform.position;
             float distance = Vector3.Distance(playerPosition, magicGeneratorPosition);
 
             if (distance < 5.0f)
@@ -108,13 +107,11 @@ namespace Assets.Code
             {
                 actorManager.Pause();
                 playerWindows.SetPauseState(true);
-                gameStateManager.nowPause = true;
             }
             else
             {
                 actorManager.Play();
                 playerWindows.SetPauseState(false);
-                gameStateManager.nowPause = false;
             }
         }
 
@@ -130,9 +127,6 @@ namespace Assets.Code
             actorManager.GeneratePlayer();
             actorManager.playerManager.SetWeaponStorage();
             actorManager.FindMagicGenerator();
-            actorManager.checkActors = true;
-
-            gameStateManager.nowPause = false;
 
             gameState = GameStateManager.GameState.Play;
         }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameStateManager : MonoBehaviour {
 
-    public bool nowPause = false;
     public ActorManager actorManager;
 
     public enum GameState
@@ -23,7 +22,7 @@ public class GameStateManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!nowPause)
+        if (actorManager.IsUpdate())
         {
 
         }
@@ -31,7 +30,7 @@ public class GameStateManager : MonoBehaviour {
 
     public GameState GetGameState()
     {
-        if (!nowPause)
+        if (actorManager.IsUpdate())
         {
             if (!actorManager.MagicGeneratorIsLive())
             {

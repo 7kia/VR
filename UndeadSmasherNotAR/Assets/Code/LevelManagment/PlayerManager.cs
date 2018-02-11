@@ -33,17 +33,15 @@ namespace Assets.Code.LevelManagment
             if(player)
             {
                 LiveActor liveActor = player.GetComponent<LiveActor>();
-                if(liveActor.isActive)
-                {
-                    player.transform.position = playerCamera.transform.position;
-                    player.transform.rotation = playerCamera.transform.rotation;
-                    player.transform.up = playerCamera.transform.up;
-                    player.transform.forward = playerCamera.transform.forward;
+                player.transform.position = playerCamera.transform.position;
+                player.transform.rotation = playerCamera.transform.rotation;
+                player.transform.up = playerCamera.transform.up;
+                player.transform.forward = playerCamera.transform.forward;
 
                     //playerCamera.transform.position = liveActor.transform.position;
                     //playerCamera.transform.rotation = liveActor.transform.rotation;
                     //playerCamera.transform.up = liveActor.transform.up;
-                }
+                
             }
         }
 

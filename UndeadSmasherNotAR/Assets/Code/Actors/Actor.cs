@@ -9,14 +9,12 @@ namespace Assets.Code.Actors
 {
     public class Actor : MonoBehaviour
     {
-
         public EffectManager effectManager;
         public FractionValue.Fraction fraction = FractionValue.Fraction.Neutral;
         public TypeEntity type;
         public Rigidbody physicBody;
 
         public DynamicСharacteristic<int> health = new DynamicСharacteristic<int>();
-        public bool isActive;
 
         // Use this for initialization
         void Start()
@@ -25,13 +23,14 @@ namespace Assets.Code.Actors
         }
 
         // Update is called once per frame
-        void Update()
+        virtual public void UpdateActor()
         {
 
         }
 
         void OnTriggerEnter(Collider col)
         {
+            // TODO : проблемы с производительностью
             effectManager.handleCollision(gameObject, col.gameObject);
         }
 
