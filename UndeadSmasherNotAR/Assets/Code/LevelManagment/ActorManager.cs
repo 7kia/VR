@@ -20,8 +20,6 @@ public class ActorManager : MonoBehaviour {
 
     public Dictionary<PlayerManager.PlayerWeapon, string> WEAPON_NAMES = new Dictionary<PlayerManager.PlayerWeapon, string>();
 
-    private bool updateActors = false;
-
     public ActorManager()
     {
         WEAPON_NAMES.Add(PlayerManager.PlayerWeapon.CobbleWeapon, "PlayerCobbleWeapon");
@@ -33,12 +31,10 @@ public class ActorManager : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
-		if (updateActors)
-        {
-            UpdateActors();
-            CheckActors();
-        }
+    public void UpdateAndCheckActors ()
+    {
+		UpdateActors();
+        CheckActors();
 	}
 
     #region UpdateActors
@@ -181,7 +177,7 @@ public class ActorManager : MonoBehaviour {
                 Destroy(child);
             }
         }
-        
+
     }
 
     private void ClearChilds(GameObject node)
@@ -214,6 +210,10 @@ public class ActorManager : MonoBehaviour {
     #region ForSetAward
     public bool MagicGeneratorIsLive()
     {
+        if(magicGenerator == null)
+        {
+            FindMagicGenerator();
+        }
         return magicGenerator.GetComponent<LiveActor>().health.value > 0;
     }
 
@@ -304,27 +304,6 @@ public class ActorManager : MonoBehaviour {
         throw new Exception("Player not create");
     }
     #endregion
-
-
-
-    #region PauseState
-
-    public void Pause()
-    {
-        updateActors = false;
-    }
-
-    public void Play()
-    {
-        updateActors = true;
-    }
-
-    public bool IsUpdate()
-    {
-        return updateActors;
-    }
-    #endregion
-
 
     private void CheckActors()
     {

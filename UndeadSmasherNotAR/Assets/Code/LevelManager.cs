@@ -18,7 +18,6 @@ namespace Assets.Code
         public GameStateManager gameStateManager;
         public PlayerInterface.PlayerInterface playerWindows;
 
-        public GameStateManager.GameState gameState = GameStateManager.GameState.NotLoad;
         // Use this for initialization
         void Start()
         {
@@ -30,34 +29,33 @@ namespace Assets.Code
         // Update is called once per frame
         void Update()
         {
-            if ((gameState != GameStateManager.GameState.Defeat)
-                && (gameState != GameStateManager.GameState.Victory)
-                && (gameState != GameStateManager.GameState.NotLoad))
+            if ((gameStateManager.gameState == GameStateManager.GameState.Play)
+                || (gameStateManager.gameState == GameStateManager.GameState.Pause))
             {
                 UpdatePlayerInterface();
 
-                gameState = gameStateManager.GetGameState();
-                switch (gameState)
+                gameStateManager.gameState = gameStateManager.GetGameState();
+                switch (gameStateManager.gameState)
                 {
                     case GameStateManager.GameState.Play:
+                        actorManager.UpdateAndCheckActors();
                         CheckDistancePlayerDistance();
-                        actorManager.Play();
                         break;
                     case GameStateManager.GameState.Pause:
-                        actorManager.Pause();
+                        SetPauseState();
                         break;
                     case GameStateManager.GameState.Defeat:
-                        actorManager.Pause();
-                        playerWindows.defeatPanel.SetActive(true);
+                        SetPauseState();
                         playerWindows.SetInteractiveButtons(false);
-                        gameState = GameStateManager.GameState.NotLoad;
+                        playerWindows.defeatPanel.SetActive(true);
+                        gameStateManager.gameState = GameStateManager.GameState.NotLoad;
                         break;
                     case GameStateManager.GameState.Victory:
-                        actorManager.Pause();
-                        playerWindows.victoryPanel.SetActive(true);
+                        SetPauseState();
                         playerWindows.SetInteractiveButtons(false);
+                        playerWindows.victoryPanel.SetActive(true);
                         playerWindows.SetAwardValue(actorManager.GetAward());
-                        gameState = GameStateManager.GameState.NotLoad;
+                        gameStateManager.gameState = GameStateManager.GameState.NotLoad;
                         break;
                 }
             }
@@ -100,35 +98,57 @@ namespace Assets.Code
             );
         }
 
+        #region PauseState
         public void SwitchPauseState()
         {
-            gameState = gameStateManager.GetGameState();
-            if (gameState == GameStateManager.GameState.Play)
+            gameStateManager.gameState = gameStateManager.GetGameState();
+            if (gameStateManager.gameState == GameStateManager.GameState.Play)
             {
-                actorManager.Pause();
-                playerWindows.SetPauseState(true);
+                SetPauseState();
             }
             else
             {
-                actorManager.Play();
-                playerWindows.SetPauseState(false);
+                SetPlayState();
             }
         }
 
+        private void SetPauseState()
+        {
+            playerWindows.SetPauseState(true);
+
+            gameStateManager.gameState = GameStateManager.GameState.Pause;
+        }
+
+        private void SetPlayState()
+        {
+            playerWindows.SetPauseState(false);
+
+            gameStateManager.gameState = GameStateManager.GameState.Play;
+        }
+        #endregion
 
         public void CreateLevel()
         {
-            gameState = GameStateManager.GameState.NotLoad;
+            gameStateManager.gameState = GameStateManager.GameState.NotLoad;
 
             ResetPlayerWindowStates();
             ClearLevel();
+
             gameObjectConfigManager.LoadConfig("GameObjects");
             mapLoader.LoadMap("Level");
-            actorManager.GeneratePlayer();
-            actorManager.playerManager.SetWeaponStorage();
+
+            RecreatePlayer();
+
             actorManager.FindMagicGenerator();
 
-            gameState = GameStateManager.GameState.Play;
+            gameStateManager.gameState = GameStateManager.GameState.Pause;
+            playerWindows.SetPauseState(false);
+        }
+
+        private void RecreatePlayer()
+        {
+            actorManager.GeneratePlayer();
+            actorManager.playerManager.SetWeaponStorage();
         }
 
         private void ResetPlayerWindowStates()
