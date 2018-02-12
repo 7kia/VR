@@ -18,7 +18,7 @@ namespace Assets.Code
          */
 
         private Dictionary<String, String> signToNameBlock = new Dictionary<string, string>();
-
+        private Vector3 mapSize;
         public MapLoader()
         {
             signToNameBlock.Add("p", "PlankBlock");
@@ -45,7 +45,7 @@ namespace Assets.Code
             var levelList = blockMap.SelectNodes("level");
 
             // TODO : handle exceptions
-            Vector3 mapSize = new Vector3(
+            mapSize = new Vector3(
                 float.Parse(GetAtribute(ref blockMap, "length")),
                 float.Parse(GetAtribute(ref blockMap, "height")),
                 float.Parse(GetAtribute(ref blockMap, "width"))
@@ -77,7 +77,7 @@ namespace Assets.Code
                 {
                     
                     objectFactory.CreateBlock(
-                        new Vector3(i, high, width),
+                        new Vector3(i - (mapSize.z / 2.0f), high, width - (mapSize.x / 2.0f)),
                         signToNameBlock[blocks[i].ToString()]
                     );
                     //Debug.Log("Create block \"" + signToNameBlock[blocks[i].ToString()] + "\"");

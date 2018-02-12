@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class GameStateManager : MonoBehaviour {
 
-    public bool nowPause = false;
     public ActorManager actorManager;
-
+    public GameState gameState = GameStateManager.GameState.NotLoad;
     public enum GameState
     {
         NotLoad,
@@ -23,32 +22,20 @@ public class GameStateManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!nowPause)
-        {
 
-        }
 	}
 
     public GameState GetGameState()
     {
-        if (!nowPause)
+        if (!actorManager.MagicGeneratorIsLive())
         {
-            if (!actorManager.MagicGeneratorIsLive())
-            {
-                Debug.Log("!MagicGeneratorIsLive");
-                //if (actorManager.ContentUndead())
-                //{
-                //    return GameState.Victory
-                //    // Give extra points 
-                //}
-                return GameState.Victory;
-            }
-            else if (!actorManager.PlayerIsLive())
-            {
-                return GameState.Defeat;
-            }
-            return GameState.Play;
+            return GameState.Victory;
         }
-        return GameState.Pause;
+        else if (!actorManager.PlayerIsLive())
+        {
+            return GameState.Defeat;
+        } 
+        return gameState;
+        
     }
 }

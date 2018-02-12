@@ -15,12 +15,10 @@ public class ActorManager : MonoBehaviour {
 
     public GameObject magicGenerator;
 
-    public bool checkActors = false;
     public static string MAGIC_GENERATOR_NAME = "MagicGenerator";
     public static string PLAYER_ENTITY_NAME = "MagicEye";
 
     public Dictionary<PlayerManager.PlayerWeapon, string> WEAPON_NAMES = new Dictionary<PlayerManager.PlayerWeapon, string>();
-
 
     public ActorManager()
     {
@@ -33,12 +31,45 @@ public class ActorManager : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
-		if (checkActors)
-        {
-            CheckActors();
-        }
+    public void UpdateAndCheckActors ()
+    {
+		UpdateActors();
+        CheckActors();
 	}
+
+    #region UpdateActors
+    private void UpdateActors()
+    {
+        Transform nodeWithActors = scene.transform;
+        for (int i = 0; i < nodeWithActors.childCount; i++)
+        {
+            var child = nodeWithActors.GetChild(i);
+            UpdateActor(child);
+        }
+    }
+
+    private void UpdateActor(Transform child)
+    {
+        LiveActor liveActor = child.GetComponent<LiveActor>();
+        Bullet bullet = child.GetComponent<Bullet>();
+        InanimateActor inanimateActor = child.GetComponent<InanimateActor>();
+
+        if (liveActor)
+        {
+            liveActor.UpdateActor();
+        }
+        else if (bullet)
+        {
+            bullet.UpdateActor();
+        }
+        else if (inanimateActor)
+        {
+            inanimateActor.UpdateActor();
+        }
+    }
+
+
+    #endregion
 
     public void FindMagicGenerator()
     {
@@ -50,6 +81,7 @@ public class ActorManager : MonoBehaviour {
                 if(child.name == MAGIC_GENERATOR_NAME)
                 {
                     magicGenerator = child;
+                    Debug.Log("Magic generator found");
                     return;
                 }
             }
@@ -72,7 +104,7 @@ public class ActorManager : MonoBehaviour {
         playerManager.player = null;
         playerManager.player = objectFactory.CreateObject(playerPosition, new Quaternion(), PLAYER_ENTITY_NAME);
     }
-
+    #endregion
     #region RecreateWeaponStorage
     private void RecreateWeaponStorage(Vector3 playerPosition)
     {
@@ -102,14 +134,8 @@ public class ActorManager : MonoBehaviour {
 
     public void CreatePlayerWeapons(PlayerManager.PlayerWeapon[] weaponNames, Vector3 playerPosition)
     {
-        for (uint i = 0; i < WEAPON_NAMES.Count; ++i)
-        {
-            Debug.Log("WEAPON_NAMES " + WEAPON_NAMES.Count);
-        }
-
         for (uint i = 0; i < weaponNames.Length; ++i)
         {
-            Debug.Log(weaponNames[i]);
             playerManager.weapons[i] = objectFactory.CreateObject(playerPosition, new Quaternion(), WEAPON_NAMES[weaponNames[i]]);
         }
     }
@@ -130,53 +156,28 @@ public class ActorManager : MonoBehaviour {
     private void ResetPlayerWeapon()
     {
         LiveActor player = playerManager.player.GetComponent<LiveActor>();
-        Debug.Log("playerManager.player.GetComponent<Weapon>().owner " + (player.weapon.owner != null));
         player.weapon = playerManager.weapons[0].GetComponent<Weapon>();
         player.weapon.owner = playerManager.player;
 
-        Debug.Log("player.weapon.owner " + (player.weapon.owner));
 
-    }
-
-    #endregion
-
-    public uint GetAward()
-    {
-        uint award = 0;
-        if(!MagicGeneratorIsLive())
-        {
-            award++;
-            if (!ContentUndead())
-            {
-                award++;
-            }
-            if(playerManager.RemainedBullet())
-            {
-                award++;
-            }
-            return award;
-        }
-        else
-        {
-            throw new Exception("Award not give if magic generator not destroy");
-        }
 
     }
 
     #region ClearScene
     public void ClearScene()
     {
+        magicGenerator = null;
         playerManager.ClearPlayerData();
         for (int i = 0; i < scene.transform.childCount; i++)
         {
             var child = scene.transform.GetChild(i).gameObject;
             if (child)
             {
-                ClearChilds(child);
+                //ClearChilds(child);
                 Destroy(child);
             }
         }
-        magicGenerator = null;
+
     }
 
     private void ClearChilds(GameObject node)
@@ -206,13 +207,13 @@ public class ActorManager : MonoBehaviour {
     }
     #endregion
 
-
+    #region ForSetAward
     public bool MagicGeneratorIsLive()
     {
-        //Debug.Log("magicGenerator health =" + scene.transform.GetChild(magicGeneratorIndex).GetComponent<LiveActor>().health.value);
-        
-
-        //scene.transform.GetChild(magicGeneratorIndex)
+        if(magicGenerator == null)
+        {
+            FindMagicGenerator();
+        }
         return magicGenerator.GetComponent<LiveActor>().health.value > 0;
     }
 
@@ -241,7 +242,31 @@ public class ActorManager : MonoBehaviour {
         return isUndead;
     }
 
-    #region Player
+    public uint GetAward()
+    {
+        uint award = 0;
+        if (!MagicGeneratorIsLive())
+        {
+            award++;
+            if (!ContentUndead())
+            {
+                award++;
+            }
+            if (playerManager.RemainedBullet())
+            {
+                award++;
+            }
+            return award;
+        }
+        else
+        {
+            throw new Exception("Award not give if magic generator not destroy");
+        }
+
+    }
+    #endregion
+
+    #region PlayerInfo
     public bool PlayerIsLive()
     {
         if (playerManager.player)
@@ -278,52 +303,7 @@ public class ActorManager : MonoBehaviour {
         }
         throw new Exception("Player not create");
     }
-
     #endregion
-
-
-
-    #region Pause
-
-    public void Pause()
-    {
-        for (int i = 0; i < scene.transform.childCount; i++)
-        {
-            var child = scene.transform.GetChild(i);
-            SetActiveState(child, false);
-        }
-    }
-
-    public void Play()
-    {
-        for (int i = 0; i < scene.transform.childCount; i++)
-        {
-            var child = scene.transform.GetChild(i);
-            SetActiveState(child, true);
-        }
-    }
-
-    private void SetActiveState(Transform child, bool isActive)
-    {
-        LiveActor liveActor = child.GetComponent<LiveActor>();
-        Bullet bullet = child.GetComponent<Bullet>();
-        InanimateActor inanimateActor = child.GetComponent<InanimateActor>();
-
-        if (liveActor)
-        {
-            liveActor.isActive = isActive;
-        }
-        else if (bullet)
-        {
-            bullet.isActive = isActive;
-        }
-        else if (inanimateActor)
-        {
-            inanimateActor.isActive = isActive;
-        }
-    }
-    #endregion
-
 
     private void CheckActors()
     {
@@ -385,8 +365,6 @@ public class ActorManager : MonoBehaviour {
         return false;
     }
 
-
-
     #endregion
 
     #region CheckHealth
@@ -441,10 +419,6 @@ public class ActorManager : MonoBehaviour {
                 return true;
             }
         }
-        //if((fraction.value == FractionValue.Fraction.Undead) && (liveActor.))
-        //{
-
-        //}
         return false;
     }
     #endregion

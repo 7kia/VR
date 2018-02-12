@@ -11,5 +11,10 @@ namespace Assets.Code.Actors
         {
             type = TypeEntity.Inanimate;
         }
+
+        override public void UpdateActor()
+        {
+
+        }
     }
 }

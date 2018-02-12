@@ -21,6 +21,7 @@ namespace Assets.Code.Behavior.BulletBehavior
             LiveActor liveActor = actor.GetComponent<LiveActor>();
             if (foundTarget != null)
             {
+
                 liveActor.Attack(foundTarget, deltaTime);
             }
             else

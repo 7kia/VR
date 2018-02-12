@@ -25,31 +25,28 @@ namespace Assets.Code.Actors
         public LiveActor()
         {
             type = TypeEntity.Live;
-            //animations = GetComponent<Animator>();
         }
 
 
         #region Attack
         public void Attack(Vector3 target, Quaternion rotation, float deltaTime)
         {
-            if (isActive)
-            {
-                RotateToTarget(target);
+            RotateToTarget(target);
 
-                GameObject createdBullet = weapon.Shoot(deltaTime, rotation);
-                if (createdBullet)
+            GameObject createdBullet = weapon.Shoot(deltaTime, rotation);
+            if (createdBullet)
+            {
+                SetBulletOption(ref createdBullet, target);
+            }
+            else
+            {
+                if (animatior)
                 {
-                    SetBulletOption(ref createdBullet, target);
+                    animatior.SetBool("Attack", true);
+                    animatior.SetTrigger(hashToAnimation["Charging"]);
                 }
-                else
-                {
-                    if (animatior)
-                    {
-                        animatior.SetBool("Attack", true);
-                        animatior.SetTrigger(hashToAnimation["Charging"]);
-                    }
-                }
-            }         
+            }
+
         }
 
         public void Attack(GameObject target, float deltaTime)
@@ -113,23 +110,17 @@ namespace Assets.Code.Actors
 
             bullet.bulletOptions = weapon.bulletOptions;
             bullet.fraction = weapon.bulletOptions.fraction;
-            //Debug.Log("bullet.bulletOptions.lifeTime = " + bullet.bulletOptions.lifeTime);
-            //Debug.Log("bullet.bulletOptions.portionDamage.damage = " + bullet.bulletOptions.portionDamage.damage);
-            //Debug.Log("bullet.bulletOptions.velocity = " + bullet.bulletOptions.velocity);
-            //Debug.Log("bullet.bulletOptions.bulletName = " + bullet.bulletOptions.bulletName);
 
             IBehavior bulletBehavior = bullet.bulletOptions.behavior;
             if (bulletBehavior.GetType() == typeof(DirectFlyingBehavior))
             {
                 DirectFlyingBehavior directFlyingBehavior = (DirectFlyingBehavior) bulletBehavior;
                 directFlyingBehavior.direction = (target.transform.position - this.transform.position).normalized;
-                //Debug.Log("DirectFlyingBehavior");
             }
             else if (bulletBehavior.GetType() == typeof(HomingBehavior))
             {
                 HomingBehavior homingBehavior = (HomingBehavior) bulletBehavior;
                 homingBehavior.target = target;
-                //Debug.Log("HomingBehavior");
             }
         }
 
@@ -138,17 +129,12 @@ namespace Assets.Code.Actors
         {
         }
 
-        // Update is called once per frame
-        void Update()
+        override public void UpdateActor()
         {
-            if(isActive)
+            if (behavior != null)
             {
-                if (behavior != null)
-                {
-                    behavior.Execute(Time.deltaTime, this.gameObject);
-                }
-            }
-           
+                behavior.Execute(Time.deltaTime, this.gameObject);
+            }          
         }
     }
 }

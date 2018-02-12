@@ -28,24 +28,16 @@ namespace Assets.Code.Actors
     {
         public BulletOptions bulletOptions = new BulletOptions();
         public MyTimer lifeTimer = new MyTimer();
+
         public Bullet()
         {
             type = TypeEntity.Bullet;
-
         }
 
-        void Update()// TODO : может несработать посмотри в код старой игры
+        override public void UpdateActor()// TODO : может несработать посмотри в код старой игры
         {
-            if (isActive)
-            {
-                UpdateBehavior();
-                lifeTimer.AddToTime(Time.deltaTime);
-            }
-            else
-            {
-                lifeTimer.StopTimer();
-            }
-
+            UpdateBehavior();
+            lifeTimer.AddToTime(Time.deltaTime);
         }
 
         private void UpdateBehavior()
